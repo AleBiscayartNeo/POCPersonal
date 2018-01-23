@@ -8,6 +8,8 @@
 		<class>com.personal.beneficios.entity.Nivel</class>
 		<class>com.personal.beneficios.entity.Proveedor</class>
 		<class>com.personal.beneficios.entity.Descuento</class>
+		<class>com.personal.beneficios.entity.Provincia</class>
+		<class>com.personal.beneficios.entity.Localidad</class>
 
 	</persistence-unit>
 </persistence>

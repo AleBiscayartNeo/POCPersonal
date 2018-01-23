@@ -10,16 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * The class Nivel
+ * The class Provincia.
  *
  */
-@Table(name="nivel")
+@Table(name="provincia")
 @Entity
-public class Nivel {
+public class Provincia {
 
 	@Id
 	@GeneratedValue
-	@Column(name="idNivel", nullable=false)
+	@Column(name="idProvincia", nullable=false)
 	private Integer id;
 	
 	@Column(name="descripcion", nullable=false)

@@ -5,17 +5,20 @@ package com.personal.beneficios.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * The class Nivel
+ * The class Localidad.
  *
  */
-@Table(name="nivel")
+@Table(name="localidad")
 @Entity
-public class Nivel {
+public class Localidad {
 
 	@Id
 	@GeneratedValue
@@ -24,16 +27,20 @@ public class Nivel {
 	
 	@Column(name="descripcion", nullable=false)
 	private String descripcion;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idProvincia", insertable = false, updatable = false)
+	private Provincia provincia;
 
 	/**
-	 * @return the id
+	 * @return the nivel
 	 */
 	public Integer getId() {
 		return id;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param nivel the nivel to set
 	 */
 	public void setId(Integer id) {
 		this.id = id;
@@ -51,5 +58,19 @@ public class Nivel {
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	/**
+	 * @return the provincia
+	 */
+	public Provincia getProvincia() {
+		return provincia;
+	}
+
+	/**
+	 * @param provincia the provincia to set
+	 */
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
 	}
 }
