@@ -56,7 +56,8 @@ public class CatalogoRepository {
 			
 		} else if(idNivel == null && idCategoria == null){
 			
-			Query queryDescuentos = entityManager.createQuery("select de from Descuento de");
+			Query queryDescuentos = entityManager.createQuery("select de from Descuento de "
+					+ "where curdate() between de.vigenciaDesde and de.vigenciaHasta");
 			descuentos = (ArrayList<Descuento>) queryDescuentos.getResultList();
 			
 		}

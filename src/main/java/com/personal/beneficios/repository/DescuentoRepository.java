@@ -41,5 +41,11 @@ public class DescuentoRepository {
 	Query query  = entityManager.createQuery("SELECT descuento FROM Descuento descuento where descuento.id=:id");
 	query.setParameter("id", idDescuento);
 	return  (Descuento) query.getSingleResult();
-	}		
+	}	
+	
+	public void agregarDescuento(Descuento descuento){
+		
+		entityManager.persist(descuento);
+		
+	}
 }
