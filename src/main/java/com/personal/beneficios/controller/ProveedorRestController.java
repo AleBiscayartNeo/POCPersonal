@@ -20,6 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.personal.beneficios.dto.DescuentoDTO;
+import com.personal.beneficios.dto.ProveedorDTO;
+import com.personal.beneficios.entity.Categoria;
+import com.personal.beneficios.entity.Descuento;
+import com.personal.beneficios.entity.Nivel;
 import com.personal.beneficios.entity.Proveedor;
 import com.personal.beneficios.repository.ProveedorRepository;
 
@@ -66,10 +71,11 @@ public class ProveedorRestController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/nuevo")
-	public Response agregarProveedor(Proveedor proveedor){
+	public Response agregarProveedor(ProveedorDTO proveedor){
 		
-				
-		proveedorRepository.agregarProveedor(proveedor);
+		Proveedor proveedorNuevo = new Proveedor();
+		cargarProveedor(proveedor, proveedorNuevo);		
+		proveedorRepository.agregarProveedor(proveedorNuevo);
 		
 		return Response.status(Status.OK).entity(proveedor).build();
 		
@@ -79,10 +85,12 @@ public class ProveedorRestController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/editar")
-	public Response editarProveedor(Proveedor proveedor){
+	public Response editarProveedor(ProveedorDTO proveedor){
 		
-			
-		proveedorRepository.editarProveedor(proveedor);
+		Proveedor proveedorEditar = new Proveedor();
+		proveedorEditar.setId(proveedor.getIdProveedor());
+		cargarProveedor(proveedor, proveedorEditar);
+		proveedorRepository.editarProveedor(proveedorEditar);
 		
 		return Response.status(Status.OK).entity(proveedor).build();
 	}
@@ -101,5 +109,10 @@ public class ProveedorRestController {
 		return Response.status(Status.OK).entity(proveedorEliminar).build();
 	}
 	
-	
+	private void cargarProveedor(ProveedorDTO proveedor, Proveedor proveedorNuevo){
+		proveedorNuevo.setLogo(proveedor.getLogo());
+		proveedorNuevo.setHorarioAtencion(proveedor.getHorarioAtencion());
+		proveedorNuevo.setRazonSocial(proveedor.getRazonSocial());
+		
+	}
 }
