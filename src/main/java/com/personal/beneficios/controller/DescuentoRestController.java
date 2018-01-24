@@ -7,11 +7,14 @@ import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -64,11 +67,51 @@ public class DescuentoRestController {
 		return Response.ok(descuento).build();
 	}
 	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/nuevo")
-	public void agregarDescuento(DescuentoDTO descuento){
+	public Response agregarDescuento(DescuentoDTO descuento){
 		
 		Descuento descuentoNuevo = new Descuento();
-		descuentoNuevo.setId(descuento.getId());
+		cargarDescuento(descuento, descuentoNuevo);
+		
+		descuentoRepository.agregarDescuento(descuentoNuevo);
+		
+		return Response.status(Status.OK).entity(descuentoNuevo).build();
+		
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/editar")
+	public Response editarDescuento(DescuentoDTO descuento){
+		
+		Descuento descuentoEditar = new Descuento();
+		descuentoEditar.setId(descuento.getId());
+		cargarDescuento(descuento, descuentoEditar);
+		
+		descuentoRepository.editarDescuento(descuentoEditar);
+		
+		return Response.status(Status.OK).entity(descuentoEditar).build();
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/eliminar")
+	public Response elminarDescuento(@QueryParam(value="idDescuento") Integer idDescuento){
+		
+		Descuento descuentoEliminar = new Descuento();
+		descuentoEliminar.setId(idDescuento);
+		
+		descuentoRepository.eliminarDescuento(descuentoEliminar);
+		
+		return Response.status(Status.OK).entity(idDescuento).build();
+	}
+	
+	private void cargarDescuento(DescuentoDTO descuento, Descuento descuentoNuevo){
 		descuentoNuevo.setNombre(descuento.getNombre());
 		descuentoNuevo.setDescripcion(descuento.getDescripcion());
 		descuentoNuevo.setDescripcionCorta(descuento.getDescripcionCorta());
@@ -88,8 +131,5 @@ public class DescuentoRestController {
 		Categoria categoria = new Categoria();
 		categoria.setId(descuento.getIdCategoria());
 		descuentoNuevo.setCategoria(categoria);
-		
-		descuentoRepository.agregarDescuento(descuentoNuevo);
-		
 	}
 }
