@@ -22,7 +22,7 @@ import com.personal.beneficios.repository.LocalidadRepository;
 
 
 /**
- * The class ProvinciaRestController.
+ * The class LocalidadRestController.
  *
  */
 @Component
@@ -40,10 +40,10 @@ public class LocalidadRestController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{idProvincia}")
 	public Response getLocalidadPorProvincia(@PathParam(value = "idProvincia") Integer idProvincia){
-		ArrayList<Localidad> Localidades = new ArrayList<Localidad>();
+		ArrayList<Localidad> localidades = new ArrayList<Localidad>();
 				
-			Localidades = localidadRepository.getLocalidadPorProvincia(100);		
+			localidades = localidadRepository.getLocalidadPorProvincia(100);		
 		
-		return Response.ok(Localidades).build();
+		return Response.ok(localidades).build();
 	}
 }
