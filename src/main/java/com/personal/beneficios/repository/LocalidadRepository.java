@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.personal.beneficios.entity.Localidad;
 
 /**
- * The class ProvinciaRepository
+ * The class LocalidadRepository
  *
  */
 @Service("localidadRepository")
