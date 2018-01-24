@@ -1,0 +1,46 @@
+<md-card>
+
+  <md-toolbar class="md-table-toolbar md-accent md-hue-1">
+    <div class="md-toolbar-tools">
+      <h2>Proveedores</h2>
+      <div flex></div>
+      <!-- <md-input-container class="md-block md-icon-left md-icon-float" style="display: flex;">
+        <input type="text" ng-model="filter">
+        <i class="material-icons">search</i>
+      </md-input-container> -->
+      <md-button class="md-raised md-primary md-hue-1" ng-click="ctrl.showProveedorForm($event)">Nuevo</md-button>
+    </div>
+  </md-toolbar>
+
+  <md-table-container>
+    <table md-table md-progress="ctrl.progress">
+      <thead md-head md-order="ctrl.query.order">
+        <tr md-row>
+          <th md-column md-order-by="razonSocial">Razon Social</th>
+          <th md-column>Horario Atención</th>
+          <th md-column>Logo</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row ng-repeat="proveedor in ctrl.proveedores | orderBy:ctrl.query.order | limitTo: ctrl.query.limit: (ctrl.query.page - 1) * ctrl.query.limit">
+          <td md-cell>{{ proveedor.razonSocial }}</td>
+          <td md-cell>{{ proveedor.horarioAtencion }}</td>
+          <td md-cell>{{ proveedor.logo }}</td>
+          <td md-cell layout="row" layout-align="end center">
+            <md-button ng-click="ctrl.editar(proveedor)" class="md-fab md-mini" aria-label="Editar proveedor">
+              <i class="material-icons">create</i>
+            </md-button>
+            <md-button ng-click="ctrl.eliminar($event, proveedor)" class="md-fab md-mini" aria-label="Eliminar proveedor">
+              <i class="material-icons">delete</i>
+            </md-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+
+  <md-table-pagination md-limit="ctrl.query.limit" md-limit-options="[5, 10, 15]" md-page="ctrl.query.page" md-total="{{ ctrl.proveedores.length }}"
+    md-on-paginate="ctrl.getProveedores" md-page-select></md-table-pagination>
+
+</md-card>
