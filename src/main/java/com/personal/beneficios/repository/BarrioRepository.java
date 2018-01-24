@@ -17,7 +17,7 @@ import com.personal.beneficios.entity.Barrio;
 
 
 /**
- * The class ProvinciaRepository
+ * The class BarrioRepository
  *
  */
 @Service("barrioRepository")
