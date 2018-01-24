@@ -42,7 +42,7 @@ public class LocalidadRestController {
 	public Response getLocalidadPorProvincia(@PathParam(value = "idProvincia") Integer idProvincia){
 		ArrayList<Localidad> localidades = new ArrayList<Localidad>();
 				
-			localidades = localidadRepository.getLocalidadPorProvincia(100);		
+			localidades = localidadRepository.getLocalidadPorProvincia(idProvincia);		
 		
 		return Response.ok(localidades).build();
 	}

@@ -1,0 +1,56 @@
+<md-dialog aria-label="Nuevo Proveedor" flex="60" flex-sm="80" flex-xs="90">
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Nuevo Proveedor</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="ctrl.cancel()">
+        <i class="material-icons" aria-label="Close dialog">clear</i>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content layout-padding>
+    <form name="proveedorForm" ng-cloak novalidate>
+
+      <md-input-container class="md-block">
+        <label>Razon Social</label>
+        <input md-maxlength="60" required name="razonSocial" ng-model="ctrl.proveedor.razonSocial">
+        <div ng-messages="proveedorForm.razonSocial.$error">
+          <div ng-message="required">El campo es requerido.</div>
+        </div>
+      </md-input-container>
+
+      <div layout="row" layout-align="space-between stretch">
+
+        <md-input-container class="md-block" flex="60">
+          <label>Horarios de Atención</label>
+          <textarea ng-model="ctrl.proveedor.horarioAtencion" name="horarioAtencion" required md-maxlength="200" rows="6" md-select-on-focus></textarea>
+          <div ng-messages="proveedorForm.horarioAtencion.$error">
+            <div ng-message="required">El campo es requerido.</div>
+          </div>
+        </md-input-container>
+
+        <md-card flex="35">
+          <img class="md-card-image" alt="image caption" ngf-src="ctrl.proveedor.logo || 'app/assets/img/image-not-found.png'" ngf-size="{width: 300, height: 300, quality: 0.9}">
+          <md-card-actions>
+            <md-button class="md-raised md-accent" required ngf-select ng-model="ctrl.proveedor.logo" name="logo" ngf-pattern="'image/*'"
+              ngf-accept="'image/*'" ngf-max-size="5MB" ngf-min-height="100" ngf-resize="{width: 200, height: 200}">Cargar Logo</md-button>
+          </md-card-actions>
+        </md-card>
+
+      </div>
+
+      <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button class="md-raised md-primary md-hue-1" ng-click="ctrl.guardar()" ng-disabled="proveedorForm.$invalid">
+          Guardar
+        </md-button>
+        <md-button class="md-raised md-warn md-hue-1" ng-click="ctrl.cancel()">
+          Cancelar
+        </md-button>
+      </md-dialog-actions>
+    </form>
+
+  </md-dialog-content>
+</md-dialog>
