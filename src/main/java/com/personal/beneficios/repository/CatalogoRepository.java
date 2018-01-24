@@ -35,7 +35,7 @@ public class CatalogoRepository {
 		if(idNivel != null && idCategoria != null){
 			
 			Query queryDescuentos = entityManager.createQuery("select de from Descuento de "
-					+ "where de.nivel.id=:idNivel and de.categoria.id=:idCategoria");
+					+ "where de.nivel.id=:idNivel and de.categoria.id=:idCategoria and curdate() between de.vigenciaDesde and de.vigenciaHasta");
 			queryDescuentos.setParameter("idNivel", idNivel);
 			queryDescuentos.setParameter("idCategoria", idCategoria);
 			descuentos = (ArrayList<Descuento>) queryDescuentos.getResultList();
@@ -46,7 +46,7 @@ public class CatalogoRepository {
 		} else if(idNivel == null && idCategoria != null){
 			
 			Query queryDescuentos = entityManager.createQuery("select de from Descuento de "
-					+ "where de.categoria.id=:idCategoria");
+					+ "where de.categoria.id=:idCategoria and curdate() between de.vigenciaDesde and de.vigenciaHasta");
 			queryDescuentos.setParameter("idCategoria", idCategoria);
 			descuentos = (ArrayList<Descuento>) queryDescuentos.getResultList();
 			
@@ -56,7 +56,7 @@ public class CatalogoRepository {
 		} else if(idNivel != null && idCategoria == null){
 			
 			Query queryDescuentos = entityManager.createQuery("select de from Descuento de "
-					+ "where de.nivel.id=:idNivel");
+					+ "where de.nivel.id=:idNivel and curdate() between de.vigenciaDesde and de.vigenciaHasta");
 			queryDescuentos.setParameter("idNivel", idNivel);
 			descuentos = (ArrayList<Descuento>) queryDescuentos.getResultList();
 			
