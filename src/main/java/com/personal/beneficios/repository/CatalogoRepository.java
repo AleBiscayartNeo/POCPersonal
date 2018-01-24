@@ -27,7 +27,7 @@ public class CatalogoRepository {
 		ArrayList<CatalogoPorNivelDTO> resultado = new ArrayList<CatalogoPorNivelDTO>();
 		ArrayList<Categoria> categorias = null;
 		ArrayList<Descuento> descuentos = null;
-		CatalogoPorNivelDTO catalogoDto = null;
+		CatalogoPorNivelDTO catalogoDto = new CatalogoPorNivelDTO();;
 		
 		Query queryCategorias = entityManager.createQuery("select ca from Categoria ca");
 		categorias = (ArrayList<Categoria>) queryCategorias.getResultList();
@@ -40,18 +40,12 @@ public class CatalogoRepository {
 			queryDescuentos.setParameter("idCategoria", idCategoria);
 			descuentos = (ArrayList<Descuento>) queryDescuentos.getResultList();
 			
-			catalogoDto = new CatalogoPorNivelDTO();
-			catalogoDto.setDescuentos(descuentos);
-			
 		} else if(idNivel == null && idCategoria != null){
 			
 			Query queryDescuentos = entityManager.createQuery("select de from Descuento de "
 					+ "where de.categoria.id=:idCategoria and curdate() between de.vigenciaDesde and de.vigenciaHasta");
 			queryDescuentos.setParameter("idCategoria", idCategoria);
 			descuentos = (ArrayList<Descuento>) queryDescuentos.getResultList();
-			
-			catalogoDto = new CatalogoPorNivelDTO();
-			catalogoDto.setDescuentos(descuentos);
 			
 		} else if(idNivel != null && idCategoria == null){
 			
@@ -60,12 +54,15 @@ public class CatalogoRepository {
 			queryDescuentos.setParameter("idNivel", idNivel);
 			descuentos = (ArrayList<Descuento>) queryDescuentos.getResultList();
 			
-			catalogoDto = new CatalogoPorNivelDTO();
-			catalogoDto.setDescuentos(descuentos);
+		} else if(idNivel == null && idCategoria == null){
+			
+			Query queryDescuentos = entityManager.createQuery("select de from Descuento de");
+			descuentos = (ArrayList<Descuento>) queryDescuentos.getResultList();
 			
 		}
 		
 		catalogoDto.setCategorias(categorias);
+		catalogoDto.setDescuentos(descuentos);
 	
 		return catalogoDto;
 	}
