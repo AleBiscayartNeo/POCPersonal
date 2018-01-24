@@ -13,24 +13,24 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * The class Localidad.
+ * The class barrio.
  *
  */
-@Table(name="localidad")
+@Table(name="barrio")
 @Entity
-public class Localidad {
+public class Barrio {
 
 	@Id
 	@GeneratedValue
-	@Column(name="idLocalidad", nullable=false)
+	@Column(name="idBarrio", nullable=false)
 	private Integer id;
 	
 	@Column(name="descripcion", nullable=false)
 	private String descripcion;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idProvincia", insertable = false, updatable = false)
-	private Provincia provincia;
+	@JoinColumn(name = "idLocalidad", insertable = false, updatable = false)
+	private Localidad localidad;
 
 	/**
 	 * @return the id
@@ -40,7 +40,7 @@ public class Localidad {
 	}
 
 	/**
-	 * @param nivel the id to set
+	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
 		this.id = id;
@@ -61,16 +61,18 @@ public class Localidad {
 	}
 
 	/**
-	 * @return the provincia
+	 * @return the localidad
 	 */
-	public Provincia getProvincia() {
-		return provincia;
+	public Localidad getLocalidad() {
+		return localidad;
 	}
 
 	/**
-	 * @param provincia the provincia to set
+	 * @param localidad the localidad to set
 	 */
-	public void setProvincia(Provincia provincia) {
-		this.provincia = provincia;
+	public void setLocalidad(Localidad localidad) {
+		this.localidad = localidad;
 	}
+
+
 }

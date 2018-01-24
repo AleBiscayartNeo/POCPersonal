@@ -13,25 +13,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.personal.beneficios.entity.Provincia;
+import com.personal.beneficios.entity.Localidad;
 
 /**
  * The class ProvinciaRepository
  *
  */
-@Service("provinciaRepository")
+@Service("localidadRepository")
 @Transactional(propagation=Propagation.REQUIRED)
-public class ProvinciaRepository {
+public class LocalidadRepository {
 
 	@PersistenceContext
 	public EntityManager entityManager;
 	
-	@SuppressWarnings("unchecked")
+	
 	@Transactional(readOnly=true)
-	public ArrayList<Provincia> getProvincias() {
+	public ArrayList<Localidad> getLocalidadPorProvincia(Integer idProvincia) {
+	
+		Query query  = entityManager.createQuery("SELECT localidad FROM Localidad localidad where localidad.provincia.id=:id");
+		 query.setParameter("id", idProvincia);
+		 return (ArrayList<Localidad>) query.getResultList();
+	}		
 		
-	Query query  = entityManager.createQuery("SELECT provincia FROM Provincia provincia");
-	return (ArrayList<Provincia>) query.getResultList();
-		
-	}
 }
