@@ -1,9 +1,16 @@
 'use strict';
 
 angular.module('app.descuentos').controller('DescuentosCtrl', DescuentosCtrl);
-DescuentosCtrl.$inject = ['DescuentosService', 'ProveedoresService', 'CommonServices', '$mdDialog'];
-function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $mdDialog) {
-  var self = this;
+DescuentosCtrl.$inject = ['DescuentosService', 'ProveedoresService', 'CommonServices', '$mdDialog','$scope'];
+function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $mdDialog,$scope) {
+	
+ var self = this;
+ $scope.$on('updateGrillaDescuentos',function(){
+	init();
+ });
+
+ function init(){
+		
   var selectProveedores;
   var selectCategorias;
 
@@ -92,6 +99,8 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
       selectCategorias = result;
     });
 }
+	init();
+}
 
 /**
  * DescuentoFormCtrl
@@ -149,11 +158,11 @@ function DescuentoFormCtrl($rootScope, descuento, proveedores, categorias, Descu
           $mdDialog.hide();
         });
     } else {
-      descuento.imagen = self.descuento.imagen.name;
       DescuentosService.saveDescuento(descuento)
         .then(function (result) {
           $rootScope.showSuccess('Descuento creado con éxito.');
           $mdDialog.hide();
+          $rootScope.$broadcast('updateGrillaDescuentos');
         });
     }
   }

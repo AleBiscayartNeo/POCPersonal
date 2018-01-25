@@ -43,18 +43,18 @@ public class DescuentoRepository {
 	return  (Descuento) query.getSingleResult();
 	}	
 	
-	@Transactional(readOnly=true)
 	public void agregarDescuento(Descuento descuento){
 		entityManager.persist(descuento);
 	}
 	
-	@Transactional(readOnly=true)
 	public void editarDescuento(Descuento descuento){
 		entityManager.persist(descuento);
 	}
 	
-	@Transactional(readOnly=true)
-	public void eliminarDescuento(Descuento descuento){
+	public void eliminarDescuento(Integer idDecuento){
+		
+		Descuento descuento = entityManager.find(Descuento.class, idDecuento);
+		
 		entityManager.remove(descuento);
 	}
 }

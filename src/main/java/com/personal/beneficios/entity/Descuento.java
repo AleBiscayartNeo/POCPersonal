@@ -37,7 +37,7 @@ public class Descuento {
 	private String descripcionCorta;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idNivel", insertable = false, updatable = false)
+	@JoinColumn(name = "idNivel")
 	private Nivel nivel;
 	
 	@Column(name="vigenciaDesde", nullable=false)
@@ -47,11 +47,11 @@ public class Descuento {
 	private Date vigenciaHasta;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idProveedor", insertable = false, updatable = false)
+	@JoinColumn(name = "idProveedor")
 	private Proveedor proveedor;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idCategoria", insertable = false, updatable = false)
+	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	
 	@Column(name="imagen", nullable=false)

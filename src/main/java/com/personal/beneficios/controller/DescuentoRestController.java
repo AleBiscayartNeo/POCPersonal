@@ -88,10 +88,8 @@ public class DescuentoRestController {
 	@Path("/editar")
 	public Response editarDescuento(DescuentoDTO descuento){
 		
-		Descuento descuentoEditar = new Descuento();
-		descuentoEditar.setId(descuento.getId());
+		Descuento descuentoEditar = descuentoRepository.getDescuentoPorID(descuento.getId());
 		cargarDescuento(descuento, descuentoEditar);
-		
 		descuentoRepository.editarDescuento(descuentoEditar);
 		
 		return Response.status(Status.OK).entity(descuentoEditar).build();
@@ -103,10 +101,7 @@ public class DescuentoRestController {
 	@Path("/eliminar")
 	public Response elminarDescuento(@QueryParam(value="idDescuento") Integer idDescuento){
 		
-		Descuento descuentoEliminar = new Descuento();
-		descuentoEliminar.setId(idDescuento);
-		
-		descuentoRepository.eliminarDescuento(descuentoEliminar);
+		descuentoRepository.eliminarDescuento(idDescuento);
 		
 		return Response.status(Status.OK).entity(idDescuento).build();
 	}
