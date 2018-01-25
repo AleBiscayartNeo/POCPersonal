@@ -43,17 +43,17 @@ public class SucursalRepository {
 	return  (Sucursal) query.getSingleResult();
 	}	
 	
-	@Transactional(readOnly=true)
+	
 	public void agregarSucursal(Sucursal sucursal){
 		entityManager.persist(sucursal);
 	}
 	
-	@Transactional(readOnly=true)
+	
 	public void editarSucursal(Sucursal sucursal){
 		entityManager.persist(sucursal);
 	}
 	
-	@Transactional(readOnly=true)
+	
 	public void eliminarSucursal(Sucursal sucursal){
 		entityManager.remove(sucursal);
 	}

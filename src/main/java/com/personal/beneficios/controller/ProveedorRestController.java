@@ -128,13 +128,10 @@ public class ProveedorRestController {
 	
 	private SucursalProveedorDTO convert (Proveedor proveedor){
 		SucursalProveedorDTO sucursalProveedorDTO = null;
-		ProveedorDTO proveedorDTO = null;
 		if(proveedor != null){
 			sucursalProveedorDTO = new SucursalProveedorDTO();
-			proveedorDTO = new ProveedorDTO();
-			proveedorDTO.setRazonSocial(proveedor.getRazonSocial());
-			proveedorDTO.setHorarioAtencion(proveedor.getHorarioAtencion());
-			sucursalProveedorDTO.setProveedorDTO(proveedorDTO);
+			sucursalProveedorDTO.setRazonSocial(proveedor.getRazonSocial());
+			sucursalProveedorDTO.setHorarioAtencion(proveedor.getHorarioAtencion());
 			if(proveedor.getSucursales() != null){
 				List<SucursalDTO> sucursales = new ArrayList<SucursalDTO>();
 				SucursalDTO sucursalDTO = null;
