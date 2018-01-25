@@ -140,14 +140,15 @@ public class ProveedorRestController {
 				SucursalDTO sucursalDTO = null;
 				for (Sucursal sucursal : proveedor.getSucursales()) {
 					sucursalDTO = new SucursalDTO();
-					sucursalDTO.setDescripcionBarrio(sucursal.getBarrio().getDescripcion());
+					sucursalDTO.setDescripcionBarrio(sucursal.getBarrio() != null ? sucursal.getBarrio().getDescripcion() : "");
 					sucursalDTO.setCalle(sucursal.getCalle());
 					sucursalDTO.setId(sucursal.getId());
 					sucursalDTO.setInformacionAdicional(sucursal.getInformacionAdicional());
 					sucursalDTO.setLatitud(sucursal.getLatitud());
+					sucursalDTO.setDescripcionLocalidad(sucursal.getLocalidad() != null ? sucursal.getLocalidad().getDescripcion() : "");
 					sucursalDTO.setLongitud(sucursal.getLongitud());
 					sucursalDTO.setNumero(sucursal.getNumero());
-					sucursalDTO.setDescripcionProvincia(sucursal.getProvincia().getDescripcion());
+					sucursalDTO.setDescripcionProvincia(sucursal.getProvincia() != null ? sucursal.getProvincia().getDescripcion() : "");
 					sucursalDTO.setTelefono(sucursal.getTelefono());
 					
 					sucursales.add(sucursalDTO);
