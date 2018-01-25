@@ -11,23 +11,12 @@ import java.util.List;
  */
 public class SucursalProveedorDTO {
 
-	private ProveedorDTO proveedorDTO;
+	private String razonSocial;
+	
+	private String horarioAtencion;
 	
 	private List<SucursalDTO> sucursales;
 
-	/**
-	 * @return the proveedorDTO
-	 */
-	public ProveedorDTO getProveedorDTO() {
-		return proveedorDTO;
-	}
-
-	/**
-	 * @param proveedorDTO the proveedorDTO to set
-	 */
-	public void setProveedorDTO(ProveedorDTO proveedorDTO) {
-		this.proveedorDTO = proveedorDTO;
-	}
 
 	/**
 	 * @return the sucursales
@@ -41,6 +30,34 @@ public class SucursalProveedorDTO {
 	 */
 	public void setSucursales(List<SucursalDTO> sucursales) {
 		this.sucursales = sucursales;
+	}
+
+	/**
+	 * @return the razonSocial
+	 */
+	public String getRazonSocial() {
+		return razonSocial;
+	}
+
+	/**
+	 * @param razonSocial the razonSocial to set
+	 */
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
+	}
+
+	/**
+	 * @return the horarioAtencion
+	 */
+	public String getHorarioAtencion() {
+		return horarioAtencion;
+	}
+
+	/**
+	 * @param horarioAtencion the horarioAtencion to set
+	 */
+	public void setHorarioAtencion(String horarioAtencion) {
+		this.horarioAtencion = horarioAtencion;
 	}
 	
 	
