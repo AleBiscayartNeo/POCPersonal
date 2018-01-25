@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.codehaus.jackson.annotate.JsonBackReference;
 
 /**
  * The class Proveedor.
@@ -37,6 +38,7 @@ public class Proveedor {
 	private String logo;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "proveedor")
+	@JsonBackReference
 	private Set<Sucursal> sucursales = new HashSet<Sucursal>();	
 
 	/**
