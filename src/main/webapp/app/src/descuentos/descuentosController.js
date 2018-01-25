@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('app.descuentos').controller('DescuentosCtrl', DescuentosCtrl);
-DescuentosCtrl.$inject = ['DescuentosService', 'ProveedoresService', '$mdDialog'];
-function DescuentosCtrl(DescuentosService, ProveedoresService, $mdDialog) {
+DescuentosCtrl.$inject = ['DescuentosService', 'ProveedoresService', 'CommonServices', '$mdDialog'];
+function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $mdDialog) {
   var self = this;
   var selectProveedores;
+  var selectCategorias;
 
   // Variables
   self.descuentos = null;
@@ -68,7 +69,8 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, $mdDialog) {
     $mdDialog.show({
       locals: {
         descuento: descuento,
-        proveedores: selectProveedores
+        proveedores: selectProveedores,
+        categorias: selectCategorias
       },
       controller: 'DescuentoFormCtrl as ctrl',
       templateUrl: 'app/src/descuentos/descuentoForm.html',
@@ -84,25 +86,25 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, $mdDialog) {
     .then(function (result) {
       selectProveedores = result;
     });
+
+  CommonServices.getCategorias()
+    .then(function (result) {
+      selectCategorias = result;
+    });
 }
 
 /**
  * DescuentoFormCtrl
  */
 angular.module('app.descuentos').controller('DescuentoFormCtrl', DescuentoFormCtrl);
-DescuentoFormCtrl.$inject = ['descuento', 'proveedores', 'DescuentosService', '$mdDialog'];
-function DescuentoFormCtrl(descuento, proveedores, DescuentosService, $mdDialog) {
+DescuentoFormCtrl.$inject = ['$rootScope', 'descuento', 'proveedores', 'categorias', 'DescuentosService', '$mdDialog'];
+function DescuentoFormCtrl($rootScope, descuento, proveedores, categorias, DescuentosService, $mdDialog) {
   var self = this;
   var isUpdate = angular.isDefined(descuento);
 
   self.titulo = isUpdate ? "Editar Descuento" : "Nuevo Descuento";
   self.proveedores = proveedores || [];
-
-  self.categorias = [
-    { id: 1, descripcion: 'Categoria 01' },
-    { id: 2, descripcion: 'Categoria 02' },
-    { id: 3, descripcion: 'Categoria 03' }
-  ];
+  self.categorias = categorias || [];
 
   self.niveles = [
     { id: 1, descripcion: 'NIVEL 1' },
@@ -143,14 +145,14 @@ function DescuentoFormCtrl(descuento, proveedores, DescuentosService, $mdDialog)
     if (isUpdate) {
       DescuentosService.editDescuento(descuento)
         .then(function (result) {
-          console.log(result);
+          $rootScope.showSuccess('Descuento editado con éxito.');
           $mdDialog.hide();
         });
     } else {
       descuento.imagen = self.descuento.imagen.name;
       DescuentosService.saveDescuento(descuento)
         .then(function (result) {
-          console.log(result);
+          $rootScope.showSuccess('Descuento creado con éxito.');
           $mdDialog.hide();
         });
     }
