@@ -3,10 +3,15 @@
  */
 package com.personal.beneficios.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -30,6 +35,9 @@ public class Proveedor {
 	
 	@Column(name="logo", nullable=false)
 	private String logo;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "proveedor")
+	private Set<Sucursal> sucursales = new HashSet<Sucursal>();	
 
 	/**
 	 * @return the id
@@ -85,5 +93,19 @@ public class Proveedor {
 	 */
 	public void setLogo(String logo) {
 		this.logo = logo;
+	}
+
+	/**
+	 * @return the sucursales
+	 */
+	public Set<Sucursal> getSucursales() {
+		return sucursales;
+	}
+
+	/**
+	 * @param sucursales the sucursales to set
+	 */
+	public void setSucursales(Set<Sucursal> sucursales) {
+		this.sucursales = sucursales;
 	}
 }
