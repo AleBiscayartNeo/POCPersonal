@@ -99,24 +99,24 @@
         </md-input-container>
       </div>
 
-      <div layout="row" layout-align="space-between stretch">
-        <md-input-container class="md-block" flex="60">
-          <label>Legales</label>
-          <textarea ng-model="ctrl.descuento.legales" name="legales" required md-maxlength="200" rows="6"></textarea>
-          <div ng-messages="descuentoForm.legales.$error">
-            <div ng-message="required">El campo es requerido.</div>
-            <div ng-message="md-maxlength">Los detalles legales deben tener menos de 200 caracteres.</div>
-          </div>
-        </md-input-container>
 
-        <md-card flex="35">
-          <img class="md-card-image" alt="image caption" ngf-src="ctrl.descuento.imagen || 'app/assets/img/image-not-found.png'" ngf-size="{width: 300, height: 300, quality: 0.9}">
-          <md-card-actions>
-            <md-button class="md-raised md-accent" required ngf-select ng-model="ctrl.descuento.imagen" name="logo" ngf-pattern="'image/*'"
-              ngf-accept="'image/*'" ngf-max-size="2MB" ngf-min-height="100" ngf-resize="{width: 200, height: 200}">Cargar foto</md-button>
-          </md-card-actions>
-        </md-card>
-      </div>
+      <md-input-container class="md-block">
+        <label>Legales</label>
+        <textarea ng-model="ctrl.descuento.legales" name="legales" required md-maxlength="200" rows="6"></textarea>
+        <div ng-messages="descuentoForm.legales.$error">
+          <div ng-message="required">El campo es requerido.</div>
+          <div ng-message="md-maxlength">Los detalles legales deben tener menos de 200 caracteres.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block">
+        <label>Imagen (url)</label>
+        <input md-maxlength="100" required name="imagen" ng-model="ctrl.descuento.imagen">
+        <div ng-messages="descuentoForm.imagen.$error">
+          <div ng-message="required">El campo es requerido.</div>
+          <div ng-message="md-maxlength">La URL debe tener menos de 100 caracteres.</div>
+        </div>
+      </md-input-container>
 
       <md-dialog-actions layout="row">
         <span flex></span>

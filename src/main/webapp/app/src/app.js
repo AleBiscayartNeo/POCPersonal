@@ -43,6 +43,21 @@ angular
       $mdSidenav('left').toggle();
     }
 
+    $rootScope.showSuccess = function (statusText) {
+      $mdToast.show({
+        hideDelay: 3000,
+        position: 'top right',
+        toastClass: 'toast-success',
+        parent: angular.element(document.body),
+        template:
+          '<md-toast>' +
+          ' <span class="md-toast-text" flex>' +
+          statusText +
+          ' </span>' +
+          '</md-toast>'
+      });
+    }
+
     $rootScope.showError = function (statusText) {
       $mdToast.show({
         hideDelay: 3000,

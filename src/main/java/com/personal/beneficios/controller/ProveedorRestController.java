@@ -99,7 +99,7 @@ public class ProveedorRestController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/eliminar")
-	public Response elminarProveedor(@QueryParam(value="idproveedor") Integer idproveedor){
+	public Response elminarProveedor(@QueryParam(value="idProveedor") Integer idproveedor){
 		
 		Proveedor proveedorEliminar = new Proveedor();
 		proveedorEliminar.setId(idproveedor);
