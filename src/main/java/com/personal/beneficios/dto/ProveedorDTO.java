@@ -3,19 +3,34 @@
  */
 package com.personal.beneficios.dto;
 
-import java.util.List;
-
 /**
  * The class ProveedorDTO.
  *
  */
+
 public class ProveedorDTO {
 
+	private Integer idProveedor;
+		
 	private String razonSocial;
-	
+		
 	private String horarioAtencion;
 	
-	private List<SucursalDTO> sucursales;
+	private String logo;
+
+	/**
+	 * @return the idProveedor
+	 */
+	public Integer getIdProveedor() {
+		return idProveedor;
+	}
+
+	/**
+	 * @param idProveedor the idProveedor to set
+	 */
+	public void setIdProveedor(Integer idProveedor) {
+		this.idProveedor = idProveedor;
+	}
 
 	/**
 	 * @return the razonSocial
@@ -46,17 +61,18 @@ public class ProveedorDTO {
 	}
 
 	/**
-	 * @return the sucursales
+	 * @return the logo
 	 */
-	public List<SucursalDTO> getSucursales() {
-		return sucursales;
+	public String getLogo() {
+		return logo;
 	}
 
 	/**
-	 * @param sucursales the sucursales to set
+	 * @param logo the logo to set
 	 */
-	public void setSucursales(List<SucursalDTO> sucursales) {
-		this.sucursales = sucursales;
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
+
 	
 }
