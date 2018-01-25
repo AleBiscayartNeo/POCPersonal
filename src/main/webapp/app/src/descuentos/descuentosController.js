@@ -1,16 +1,11 @@
 'use strict';
 
 angular.module('app.descuentos').controller('DescuentosCtrl', DescuentosCtrl);
-DescuentosCtrl.$inject = ['DescuentosService', 'ProveedoresService', 'CommonServices', '$mdDialog','$scope'];
-function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $mdDialog,$scope) {
-	
- var self = this;
- $scope.$on('updateGrillaDescuentos',function(){
-	init();
- });
+DescuentosCtrl.$inject = ['DescuentosService', 'ProveedoresService', 'CommonServices', '$mdDialog', '$scope'];
+function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $mdDialog, $scope) {
 
- function init(){
-		
+  var self = this;
+
   var selectProveedores;
   var selectCategorias;
 
@@ -25,10 +20,13 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
   self.eliminar = eliminar;
 
   // Inicializo la tabla de descuentos
-  self.progress = DescuentosService.getDescuentos()
-    .then(function (result) {
-      self.descuentos = result;
-    });
+  function init() {
+    self.progress = DescuentosService.getDescuentos()
+      .then(function (result) {
+        self.descuentos = result;
+      });
+  }
+  init();
 
   /**
    * 
@@ -62,8 +60,10 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
         .targetEvent(event)
         .ok('Eliminar')
         .cancel('Cancelar')).then(function () {
-          DescuentosService.deleteDescuento(descuento.id).then(function (result) {
-          });
+          DescuentosService.deleteDescuento(descuento.id)
+            .then(function (result) {
+              init();
+            });
         }, function () { });
   }
 
@@ -85,9 +85,13 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
       targetEvent: event,
       clickOutsideToClose: false,
       fullscreen: false
-    });
+    })
+      .then(function (update) {
+        if (update) {
+          init();
+        };
+      }, function () { });
   }
-
 
   ProveedoresService.getProveedores()
     .then(function (result) {
@@ -98,8 +102,7 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
     .then(function (result) {
       selectCategorias = result;
     });
-}
-	init();
+
 }
 
 /**
@@ -155,14 +158,13 @@ function DescuentoFormCtrl($rootScope, descuento, proveedores, categorias, Descu
       DescuentosService.editDescuento(descuento)
         .then(function (result) {
           $rootScope.showSuccess('Descuento editado con éxito.');
-          $mdDialog.hide();
+          $mdDialog.hide(true);
         });
     } else {
       DescuentosService.saveDescuento(descuento)
         .then(function (result) {
           $rootScope.showSuccess('Descuento creado con éxito.');
-          $mdDialog.hide();
-          $rootScope.$broadcast('updateGrillaDescuentos');
+          $mdDialog.hide(true);
         });
     }
   }
