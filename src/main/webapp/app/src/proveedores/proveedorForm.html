@@ -15,7 +15,7 @@
 
       <md-input-container class="md-block">
         <label>Razon Social</label>
-        <input md-maxlength="60" required name="razonSocial" ng-model="ctrl.proveedor.razonSocial">
+        <input md-maxlength="60" required name="razonSocial" ng-model="ctrl.proveedor.razonSocial" md-autofocus>
         <div ng-messages="proveedorForm.razonSocial.$error">
           <div ng-message="required">El campo es requerido.</div>
         </div>

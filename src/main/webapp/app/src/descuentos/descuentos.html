@@ -4,7 +4,7 @@
     <div class="md-toolbar-tools">
       <h2>Descuentos</h2>
       <div flex></div>
-      <md-button class="md-raised md-primary md-hue-1" ng-click="ctrl.showDescuentoForm($event)">Nuevo</md-button>
+      <md-button class="md-raised md-primary md-hue-1" ng-click="ctrl.nuevo($event)">Nuevo</md-button>
     </div>
   </md-toolbar>
 
@@ -35,7 +35,7 @@
           <td md-cell>{{ descuento.proveedor.razonSocial }}</td>
           <td md-cell>{{ descuento.categoria.descripcion }}</td>
           <td md-cell layout="row" layout-align="end center">
-            <md-button ng-click="ctrl.editar(descuento)" class="md-fab md-mini" aria-label="Editar Descuento">
+            <md-button ng-click="ctrl.editar($event, descuento)" class="md-fab md-mini" aria-label="Editar Descuento">
               <i class="material-icons">create</i>
             </md-button>
             <md-button ng-click="ctrl.eliminar($event, descuento)" class="md-fab md-mini" aria-label="Eliminar Descuento">
