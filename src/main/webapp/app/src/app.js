@@ -2,6 +2,7 @@ angular
   .module('app', [
     'ngRoute',
     'ngMaterial',
+    'ngMessages',
     'md.data.table',
     'ngFileUpload',
     'app.descuentos',
@@ -48,11 +49,12 @@ angular
         position: 'top right',
         toastClass: 'toast-error',
         parent: angular.element(document.body),
-        template: `<md-toast>
-                    <span class="md-toast-text" flex>
-                      El servicio no se encuentra disponible, intente nuevamente más tarde.
-                    </span>
-                  </md-toast>`
+        template:
+          '<md-toast>' +
+          ' <span class="md-toast-text" flex>' +
+          '   El servicio no se encuentra disponible, intente nuevamente más tarde.' +
+          ' </span>' +
+          '</md-toast>'
       });
     }
 

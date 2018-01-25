@@ -151,3 +151,14 @@ button.md-fab > i {
   min-height: 24px;
   min-width: 24px;
 }
+
+.md-input-container {
+  margin: 10px 0;
+}
+
+/* md-table */
+
+table.md-table:not(.md-row-select) td.md-cell:nth-child(n+2):nth-last-child(n+2), 
+table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2) {
+  padding: 0 10px 0 0;
+}

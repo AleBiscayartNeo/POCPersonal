@@ -1,0 +1,133 @@
+<md-dialog aria-label="Nuevo Descuento" flex="60" flex-sm="80" flex-xs="90">
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Nuevo Descuento</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="ctrl.cancel()">
+        <i class="material-icons" aria-label="Close dialog">clear</i>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content layout-padding>
+    <form name="descuentoForm" ng-cloak novalidate>
+
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm="30">
+          <label>Nombre</label>
+          <input md-maxlength="45" required name="nombre" ng-model="ctrl.descuento.nombre" md-autofocus>
+          <div ng-messages="descuentoForm.nombre.$error">
+            <div ng-message="required">El campo es requerido.</div>
+            <div ng-message="md-maxlength">El nombre debe tener menos de 45 caracteres.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex flex-offset-gt-sm="5">
+          <label>Descripción corta</label>
+          <input md-maxlength="50" required name="descripcionCorta" ng-model="ctrl.descuento.descripcionCorta">
+          <div ng-messages="descuentoForm.descripcionCorta.$error">
+            <div ng-message="required">El campo es requerido.</div>
+            <div ng-message="md-maxlength">La descripcion debe tener menos de 50 caracteres.</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <md-input-container class="md-block">
+        <label>Descripción</label>
+        <input md-maxlength="200" required name="descripcion" ng-model="ctrl.descuento.descripcion">
+        <div ng-messages="descuentoForm.descripcion.$error">
+          <div ng-message="required">El campo es requerido.</div>
+          <div ng-message="md-maxlength">La descripcion debe tener menos de 200 caracteres.</div>
+        </div>
+      </md-input-container>
+
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex>
+          <label>Nivel</label>
+          <md-select name="nivel" ng-model="ctrl.descuento.idNivel" placeholder="Nivel" required>
+            <md-option ng-repeat="nivel in ctrl.niveles" ng-value="nivel.id">
+              {{nivel.descripcion}}
+            </md-option>
+          </md-select>
+          <div ng-messages="descuentoForm.nivel.$error">
+            <div ng-message="required">El campo es requerido.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex>
+          <label>Vigencia Desde</label>
+          <md-datepicker name="vigenciaDesde" ng-model="ctrl.descuento.vigenciaDesde" md-max-date="ctrl.descuento.vigenciaHasta" required></md-datepicker>
+          <div ng-messages="descuentoForm.vigenciaDesde.$error">
+            <div ng-message="required">El campo es requerido.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex>
+          <label>Vigencia Hasta</label>
+          <md-datepicker name="vigenciaHasta" ng-model="ctrl.descuento.vigenciaHasta" md-min-date="ctrl.descuento.vigenciaDesde" required></md-datepicker>
+          <div ng-messages="descuentoForm.vigenciaHasta.$error">
+            <div ng-message="required">El campo es requerido.</div>
+          </div>
+        </md-input-container>
+      </div>
+
+
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex>
+          <label>Proveedor</label>
+          <md-select name="proveedor" ng-model="ctrl.descuento.idProveedor" placeholder="Proveedor" required>
+            <md-option ng-repeat="proveedor in ctrl.proveedores" ng-value="proveedor.id">
+              {{proveedor.razonSocial}}
+            </md-option>
+          </md-select>
+          <div ng-messages="descuentoForm.proveedor.$error">
+            <div ng-message="required">Seleccione un proveedor.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex>
+          <label>Categoría</label>
+          <md-select name="categoria" ng-model="ctrl.descuento.idCategoria" placeholder="Categoría" required>
+            <md-option ng-repeat="categoria in ctrl.categorias" ng-value="categoria.id">
+              {{categoria.descripcion}}
+            </md-option>
+          </md-select>
+          <div ng-messages="descuentoForm.categoria.$error">
+            <div ng-message="required">Seleccione una categoría.</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div layout="row" layout-align="space-between stretch">
+        <md-input-container class="md-block" flex="60">
+          <label>Legales</label>
+          <textarea ng-model="ctrl.descuento.legales" name="legales" required md-maxlength="200" rows="6"></textarea>
+          <div ng-messages="descuentoForm.legales.$error">
+            <div ng-message="required">El campo es requerido.</div>
+            <div ng-message="md-maxlength">Los detalles legales deben tener menos de 200 caracteres.</div>
+          </div>
+        </md-input-container>
+
+        <md-card flex="35">
+          <img class="md-card-image" alt="image caption" ngf-src="ctrl.descuento.imagen || 'app/assets/img/image-not-found.png'" ngf-size="{width: 300, height: 300, quality: 0.9}">
+          <md-card-actions>
+            <md-button class="md-raised md-accent" required ngf-select ng-model="ctrl.descuento.imagen" name="logo" ngf-pattern="'image/*'"
+              ngf-accept="'image/*'" ngf-max-size="2MB" ngf-min-height="100" ngf-resize="{width: 200, height: 200}">Cargar foto</md-button>
+          </md-card-actions>
+        </md-card>
+      </div>
+
+      <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button class="md-raised md-primary md-hue-1" ng-click="ctrl.guardar()" ng-disabled="descuentoForm.$invalid">
+          Guardar
+        </md-button>
+        <md-button class="md-raised md-warn md-hue-1" ng-click="ctrl.cancel()">
+          Cancelar
+        </md-button>
+      </md-dialog-actions>
+    </form>
+
+  </md-dialog-content>
+</md-dialog>

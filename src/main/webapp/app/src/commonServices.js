@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('app').service('CommonServices', commonServices);
-commonServices.$inject = ['$http', '$interpolate', 'APP_CONFIG'];
-function commonServices($http, $interpolate, APP_CONFIG) {
+commonServices.$inject = ['$http', 'APP_CONFIG'];
+function commonServices($http, APP_CONFIG) {
 
   return {
     getProvincias: getProvincias,
