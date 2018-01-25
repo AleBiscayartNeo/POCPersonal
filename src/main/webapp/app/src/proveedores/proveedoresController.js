@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('app.proveedores')
-  .controller('ProveedoresCtrl', ['$scope', 'ProveedoresService', '$mdDialog', 'CommonServices',
-    function ($scope, ProveedoresService, $mdDialog, CommonServices) {
+  .controller('ProveedoresCtrl', ['$scope', 'ProveedoresService', '$mdDialog', 'CommonServices', '$location',
+    function ($scope, ProveedoresService, $mdDialog, CommonServices, $location) {
       var self = this;
 
       // Variables
@@ -12,7 +12,6 @@ angular.module('app.proveedores')
       self.progress = null;
 
       // Funciones
-      self.verSucursales = verSucursales;
       self.ver = ver;
       self.nuevo = nuevo;
       self.editar = editar;
@@ -26,16 +25,9 @@ angular.module('app.proveedores')
        * 
        * @param {Object} proveedor 
        */
-      function verSucursales(proveedor) {
-        console.log('Ver Sucursales: ' + proveedor.id);
-      }
-
-      /**
-       * 
-       * @param {Object} proveedor 
-       */
       function ver(proveedor) {
-        console.log('Ver Proveedor: ' + proveedor.id);
+        var route = '/proveedor/' + proveedor.id;
+        $location.url(route);
       }
 
       /**

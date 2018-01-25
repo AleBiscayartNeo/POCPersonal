@@ -6,7 +6,8 @@ angular
     'md.data.table',
     'ngFileUpload',
     'app.descuentos',
-    'app.proveedores'
+    'app.proveedores',
+    'app.sucursales'
   ])
   .constant('APP_CONFIG', {
     'API_URL': 'http://localhost:8080/app-beneficios/services'
