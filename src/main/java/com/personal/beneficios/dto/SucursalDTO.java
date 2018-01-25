@@ -23,6 +23,12 @@ public class SucursalDTO {
 		private String informacionAdicional;
 				
 		private int idProvincia;
+		
+		private String descripcionProvincia;
+		
+		private String descripcionLocalidad;
+		
+		private String descripcionBarrio;
 				
 		private int idLocalidad;
 				
@@ -188,6 +194,48 @@ public class SucursalDTO {
 		 */
 		public void setTelefono(Integer telefono) {
 			this.telefono = telefono;
+		}
+
+		/**
+		 * @return the descripcionProvincia
+		 */
+		public String getDescripcionProvincia() {
+			return descripcionProvincia;
+		}
+
+		/**
+		 * @param descripcionProvincia the descripcionProvincia to set
+		 */
+		public void setDescripcionProvincia(String descripcionProvincia) {
+			this.descripcionProvincia = descripcionProvincia;
+		}
+
+		/**
+		 * @return the descripcionLocalidad
+		 */
+		public String getDescripcionLocalidad() {
+			return descripcionLocalidad;
+		}
+
+		/**
+		 * @param descripcionLocalidad the descripcionLocalidad to set
+		 */
+		public void setDescripcionLocalidad(String descripcionLocalidad) {
+			this.descripcionLocalidad = descripcionLocalidad;
+		}
+
+		/**
+		 * @return the descripcionBarrio
+		 */
+		public String getDescripcionBarrio() {
+			return descripcionBarrio;
+		}
+
+		/**
+		 * @param descripcionBarrio the descripcionBarrio to set
+		 */
+		public void setDescripcionBarrio(String descripcionBarrio) {
+			this.descripcionBarrio = descripcionBarrio;
 		}
 
 		

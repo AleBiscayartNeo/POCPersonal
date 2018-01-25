@@ -4,6 +4,7 @@
 package com.personal.beneficios.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -20,12 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.personal.beneficios.dto.DescuentoDTO;
 import com.personal.beneficios.dto.ProveedorDTO;
-import com.personal.beneficios.entity.Categoria;
-import com.personal.beneficios.entity.Descuento;
-import com.personal.beneficios.entity.Nivel;
+import com.personal.beneficios.dto.SucursalDTO;
+import com.personal.beneficios.dto.SucursalProveedorDTO;
 import com.personal.beneficios.entity.Proveedor;
+import com.personal.beneficios.entity.Sucursal;
 import com.personal.beneficios.repository.ProveedorRepository;
 
 /**
@@ -114,5 +114,48 @@ public class ProveedorRestController {
 		proveedorNuevo.setHorarioAtencion(proveedor.getHorarioAtencion());
 		proveedorNuevo.setRazonSocial(proveedor.getRazonSocial());
 		
+	}
+	
+	@SuppressWarnings("finally")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/SucursalesProveedor/{idProveedor}")
+	public Response obtenerProveedor(@PathParam(value = "idProveedor") Integer idProveedor){
+		Proveedor proveedor = proveedorRepository.getProveedoresPorID(idProveedor);
+		return Response.ok(convert(proveedor)).build();
+	}
+	
+	private SucursalProveedorDTO convert (Proveedor proveedor){
+		SucursalProveedorDTO sucursalProveedorDTO = null;
+		ProveedorDTO proveedorDTO = null;
+		if(proveedor != null){
+			sucursalProveedorDTO = new SucursalProveedorDTO();
+			proveedorDTO = new ProveedorDTO();
+			proveedorDTO.setRazonSocial(proveedor.getRazonSocial());
+			proveedorDTO.setHorarioAtencion(proveedor.getHorarioAtencion());
+			sucursalProveedorDTO.setProveedorDTO(proveedorDTO);
+			if(proveedor.getSucursales() != null){
+				List<SucursalDTO> sucursales = new ArrayList<SucursalDTO>();
+				SucursalDTO sucursalDTO = null;
+				for (Sucursal sucursal : proveedor.getSucursales()) {
+					sucursalDTO = new SucursalDTO();
+					sucursalDTO.setDescripcionBarrio(sucursal.getBarrio().getDescripcion());
+					sucursalDTO.setCalle(sucursal.getCalle());
+					sucursalDTO.setId(sucursal.getId());
+					sucursalDTO.setInformacionAdicional(sucursal.getInformacionAdicional());
+					sucursalDTO.setLatitud(sucursal.getLatitud());
+					sucursalDTO.setLongitud(sucursal.getLongitud());
+					sucursalDTO.setNumero(sucursal.getNumero());
+					sucursalDTO.setDescripcionProvincia(sucursal.getProvincia().getDescripcion());
+					sucursalDTO.setTelefono(sucursal.getTelefono());
+					
+					sucursales.add(sucursalDTO);
+				}
+				sucursalProveedorDTO.setSucursales(sucursales);
+			}
+		}
+		
+		return sucursalProveedorDTO;
 	}
 }
