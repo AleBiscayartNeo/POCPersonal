@@ -10,6 +10,7 @@
 		<class>com.personal.beneficios.entity.Descuento</class>
 		<class>com.personal.beneficios.entity.Provincia</class>
 		<class>com.personal.beneficios.entity.Localidad</class>
-
+		<class>com.personal.beneficios.entity.Sucursal</class>
+		<class>com.personal.beneficios.entity.Barrio</class>
 	</persistence-unit>
 </persistence>
