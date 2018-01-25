@@ -43,17 +43,17 @@ public class ProveedorRepository {
 	return  (Proveedor) query.getSingleResult();
 	}		
 	
-	@Transactional(readOnly=true)
+
 	public void agregarProveedor(Proveedor proveedor){
 		entityManager.persist(proveedor);
 	}
 	
-	@Transactional(readOnly=true)
+
 	public void editarProveedor(Proveedor proveedor){
 		entityManager.persist(proveedor);
 	}
 	
-	@Transactional(readOnly=true)
+
 	public void eliminarProveedor(Proveedor proveedor){
 		entityManager.remove(proveedor);
 	}

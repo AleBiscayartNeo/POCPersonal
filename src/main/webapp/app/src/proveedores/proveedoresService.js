@@ -11,13 +11,12 @@ function ProveedoresService($q, $http, APP_CONFIG) {
   function getProveedores() {
     return $http({
       method: 'GET',
-      url: 'http://www.mocky.io/v2/5a67ced82d0000f330becfe9?mocky-delay=200ms' //200
+      url: APP_CONFIG.API_URL + '/proveedor/all'
     }).then(function (response) {
       return response.data;
     }, function (response) {
       return null;
     });
-    // return $q.when(proveedores);
   }
 
   function saveProveedor() {

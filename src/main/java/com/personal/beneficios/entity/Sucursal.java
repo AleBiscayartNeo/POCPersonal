@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * The class Sucursal.
  *
  */
-@Table(name="descuento")
+@Table(name="sucursal")
 @Entity
 public class Sucursal {
 	
