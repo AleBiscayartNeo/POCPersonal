@@ -1,13 +1,14 @@
 'use strict';
 
-angular.module('app').service('CommonServices', commonServices);
-commonServices.$inject = ['$http', 'APP_CONFIG'];
-function commonServices($http, APP_CONFIG) {
+angular.module('app').service('CommonServices', CommonServices);
+CommonServices.$inject = ['$http', 'APP_CONFIG'];
+function CommonServices($http, APP_CONFIG) {
 
   return {
     getProvincias: getProvincias,
     getLocalidad: getLocalidad,
-    getBarrio: getBarrio
+    getBarrio: getBarrio,
+    getCategorias: getCategorias
   };
 
   /**
@@ -47,6 +48,20 @@ function commonServices($http, APP_CONFIG) {
     return $http({
       method: 'GET',
       url: APP_CONFIG.API_URL + "/barrio/" + idLocalidad
+    }).then(function (response) {
+      return response.data;
+    }, function (response) {
+      return null;
+    });
+  }
+
+  /**
+   * 
+   */
+  function getCategorias() {
+    return $http({
+      method: 'GET',
+      url: APP_CONFIG.API_URL + "/categorias/all"
     }).then(function (response) {
       return response.data;
     }, function (response) {

@@ -8,7 +8,7 @@
         <input type="text" ng-model="filter">
         <i class="material-icons">search</i>
       </md-input-container> -->
-      <md-button class="md-raised md-primary md-hue-1" ng-click="ctrl.showProveedorForm($event)">Nuevo</md-button>
+      <md-button class="md-raised md-primary md-hue-1" ng-click="ctrl.nuevo($event)">Nuevo</md-button>
     </div>
   </md-toolbar>
 
@@ -18,7 +18,6 @@
         <tr md-row>
           <th md-column md-order-by="razonSocial">Razon Social</th>
           <th md-column>Horario Atención</th>
-          <th md-column>Logo</th>
           <th></th>
         </tr>
       </thead>
@@ -26,9 +25,11 @@
         <tr md-row ng-repeat="proveedor in ctrl.proveedores | orderBy:ctrl.query.order | limitTo: ctrl.query.limit: (ctrl.query.page - 1) * ctrl.query.limit">
           <td md-cell>{{ proveedor.razonSocial }}</td>
           <td md-cell>{{ proveedor.horarioAtencion }}</td>
-          <td md-cell>{{ proveedor.logo }}</td>
           <td md-cell layout="row" layout-align="end center">
-            <md-button ng-click="ctrl.editar(proveedor)" class="md-fab md-mini" aria-label="Editar proveedor">
+            <md-button ng-click="ctrl.ver(proveedor)" class="md-fab md-mini" aria-label="Ver proveedor">
+              <i class="material-icons">visibility</i>
+            </md-button>
+            <md-button ng-click="ctrl.editar($event, proveedor)" class="md-fab md-mini" aria-label="Editar proveedor">
               <i class="material-icons">create</i>
             </md-button>
             <md-button ng-click="ctrl.eliminar($event, proveedor)" class="md-fab md-mini" aria-label="Eliminar proveedor">

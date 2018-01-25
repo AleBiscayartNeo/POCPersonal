@@ -4,13 +4,17 @@ angular.module('app.proveedores')
   .controller('ProveedoresCtrl', ['$scope', 'ProveedoresService', '$mdDialog', 'CommonServices',
     function ($scope, ProveedoresService, $mdDialog, CommonServices) {
       var self = this;
+
+      // Variables
       self.proveedores = [];
       self.selected = [];
       self.query = { order: 'razonSocial', limit: 5, page: 1 };
       self.progress = null;
 
-      self.showProveedorForm = showProveedorForm;
+      // Funciones
       self.verSucursales = verSucursales;
+      self.ver = ver;
+      self.nuevo = nuevo;
       self.editar = editar;
       self.eliminar = eliminar;
 
@@ -18,14 +22,45 @@ angular.module('app.proveedores')
         self.proveedores = result;
       });
 
+      /**
+       * 
+       * @param {Object} proveedor 
+       */
       function verSucursales(proveedor) {
         console.log('Ver Sucursales: ' + proveedor.id);
       }
 
-      function editar(proveedor) {
-        console.log('Editar: ' + id);
+      /**
+       * 
+       * @param {Object} proveedor 
+       */
+      function ver(proveedor) {
+        console.log('Ver Proveedor: ' + proveedor.id);
       }
 
+      /**
+       * 
+       * @param {$event} event 
+       * @param {Object} proveedor 
+       */
+      function nuevo(event) {
+        showProveedorForm(event);
+      }
+
+      /**
+       * 
+       * @param {$event} event 
+       * @param {Object} proveedor 
+       */
+      function editar(event, proveedor) {
+        showProveedorForm(event, proveedor);
+      }
+
+      /**
+       * 
+       * @param {$event} event 
+       * @param {Object} proveedor 
+       */
       function eliminar(event, proveedor) {
         $mdDialog.show(
           $mdDialog.confirm()
@@ -35,7 +70,7 @@ angular.module('app.proveedores')
             .targetEvent(event)
             .ok('Eliminar')
             .cancel('Cancelar')).then(function () {
-              ProveedoresService.saveProveedor().then(function (result) {
+              ProveedoresService.deleteProveedor(proveedor.id).then(function (result) {
                 console.log('Eliminar: ' + proveedor.id);
               });
             }, function () {
@@ -43,8 +78,14 @@ angular.module('app.proveedores')
             });
       }
 
-      function showProveedorForm(event) {
+      /**
+       * 
+       * @param {$event} event 
+       * @param {Object} proveedor 
+       */
+      function showProveedorForm(event, proveedor) {
         $mdDialog.show({
+          locals: { proveedor: proveedor },
           controller: 'ProveedorFormCtrl as ctrl',
           templateUrl: 'app/src/proveedores/proveedorForm.html',
           parent: angular.element(document.body),
@@ -56,9 +97,15 @@ angular.module('app.proveedores')
 
     }])
 
-  .controller('ProveedorFormCtrl', ['$scope', 'ProveedoresService', '$mdDialog',
-    function ($scope, ProveedoresService, $mdDialog) {
+  /**
+   * ProveedorFormCtrl
+   */
+  .controller('ProveedorFormCtrl', ['$rootScope', 'proveedor', 'ProveedoresService', '$mdDialog',
+    function ($rootScope, proveedor, ProveedoresService, $mdDialog) {
       var self = this;
+      var isUpdate = angular.isDefined(proveedor);
+
+      self.titulo = isUpdate ? "Editar Proveedor" : "Nuevo Proveedor";
 
       self.proveedor = {
         razonSocial: null,
@@ -66,9 +113,24 @@ angular.module('app.proveedores')
         logo: null
       }
 
+      if (isUpdate) {
+        self.proveedor = proveedor;
+      }
+
       self.guardar = function () {
-        console.log(self.proveedor);
-        $mdDialog.hide();
+        if (isUpdate) {
+          ProveedoresService.editProveedor()
+            .then(function (result) {
+              $rootScope.showSuccess('Proveedor editado con éxito.');
+              $mdDialog.hide();
+            });
+        } else {
+          ProveedoresService.saveProveedor()
+            .then(function (result) {
+              $rootScope.showSuccess('Proveedor creado con éxito.');
+              $mdDialog.hide();
+            });
+        }
       }
 
       self.cancel = function () {
