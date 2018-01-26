@@ -46,7 +46,6 @@ angular
 
     $rootScope.$on("$locationChangeStart", function (event, next, current) {
       $rootScope.isLoggedIn = AuthService.isAuth();
-      console.log('locationChangeStart');
       if ($rootScope.isLoggedIn) {
         if ($location.url() == '/login') {
           $location.url('/');

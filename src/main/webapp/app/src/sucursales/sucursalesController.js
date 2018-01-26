@@ -5,6 +5,7 @@ SucursalesCtrl.$inject = ['$routeParams', 'ProveedoresService', 'SucursalesServi
 function SucursalesCtrl($routeParams, ProveedoresService, SucursalesService, $mdDialog, CommonServices) {
   var self = this;
   var selectProvincias = null;
+  var idProveedor = $routeParams.id;
 
   // Variables
   self.proveedor = null;
@@ -18,14 +19,14 @@ function SucursalesCtrl($routeParams, ProveedoresService, SucursalesService, $md
   self.editar = editar;
   self.eliminar = eliminar;
 
-  ProveedoresService.getProveedor($routeParams.id)
+  ProveedoresService.getProveedor(idProveedor)
     .then(function (result) {
       self.proveedor = result;
     });
 
   // Inicializo la tabla de sucursales
   function init() {
-    self.progress = SucursalesService.getSucursales()
+    self.progress = SucursalesService.getSucursales(idProveedor)
       .then(function (result) {
         self.sucursales = result;
       });
@@ -81,7 +82,7 @@ function SucursalesCtrl($routeParams, ProveedoresService, SucursalesService, $md
   function showSucursalForm(event, sucursal) {
     $mdDialog.show({
       locals: {
-        proveedorId: $routeParams.id,
+        proveedorId: idProveedor,
         sucursal: sucursal,
         provincias: selectProvincias
       },
