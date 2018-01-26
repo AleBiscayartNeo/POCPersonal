@@ -86,14 +86,8 @@ public class SucursalRestController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/nuevo")
 	public Response agregarSucursal(SucursalDTO sucursal){
-		
-		Sucursal sucursalNuevo = new Sucursal();
-		cargarSucursal(sucursal, sucursalNuevo);
-		
-		sucursalRepository.agregarSucursal(sucursalNuevo);
-		
-		return Response.status(Status.OK).entity(sucursalNuevo).build();
-		
+		sucursalRepository.agregarSucursal(sucursal);
+		return Response.status(Status.OK).entity(sucursal).build();
 	}
 	
 	@POST
@@ -101,14 +95,8 @@ public class SucursalRestController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/editar")
 	public Response editarSucursal(SucursalDTO sucursal){
-		
-		Sucursal sucursalEditar = new Sucursal();
-		sucursalEditar.setId(sucursal.getId());
-		cargarSucursal(sucursal, sucursalEditar);
-		
-		sucursalRepository.editarSucursal(sucursalEditar);
-		
-		return Response.status(Status.OK).entity(sucursalEditar).build();
+		sucursalRepository.editarSucursal(sucursal);
+		return Response.status(Status.OK).entity(sucursal).build();
 	}
 	
 	@POST
@@ -118,36 +106,5 @@ public class SucursalRestController {
 	public Response elminarSucursal(@QueryParam(value="idSucursal") Integer idsucursal){
 		sucursalRepository.eliminarSucursal(idsucursal);
 		return Response.status(Status.OK).entity(idsucursal).build();
-	}
-	
-	private void cargarSucursal(SucursalDTO sucursal, Sucursal sucursalNuevo){
-		
-		sucursalNuevo.setCalle(sucursal.getCalle());
-		sucursalNuevo.setNumero(sucursal.getNumero());
-		if (sucursal.getInformacionAdicional() != null){
-			sucursalNuevo.setInformacionAdicional(sucursal.getInformacionAdicional());
-		}			
-		sucursalNuevo.setTelefono(sucursal.getTelefono());
-		sucursalNuevo.setLongitud(sucursal.getLongitud());
-		sucursalNuevo.setLatitud(sucursal.getLatitud());
-		
-		if (sucursal.getBarrio() != null){
-			sucursalNuevo.setBarrio(sucursal.getBarrio());
-		}
-		
-		Provincia provincia = new Provincia();
-		provincia.setId(sucursal.getIdProvincia());
-		sucursalNuevo.setProvincia(provincia);
-		
-		Localidad localidad =  new Localidad();
-		localidad.setId(sucursal.getIdLocalidad());
-		sucursalNuevo.setLocalidad(localidad);
-		
-		sucursalNuevo.setBarrio(sucursal.getBarrio());
-		
-		Proveedor proveedor = new Proveedor();
-		proveedor.setId(sucursal.getIdProveedor());
-		sucursalNuevo.setProveedor(proveedor);
-		
 	}
 }

@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.personal.beneficios.dto.DescuentoDTO;
+import com.personal.beneficios.dto.DescuentoGeolocalizadoDTO;
 import com.personal.beneficios.entity.Categoria;
 import com.personal.beneficios.entity.Descuento;
 import com.personal.beneficios.entity.Nivel;
@@ -95,6 +96,17 @@ public class DescuentoRestController {
 		descuentoRepository.eliminarDescuento(idDescuento);
 		
 		return Response.status(Status.OK).entity(idDescuento).build();
+	}
+	
+	@SuppressWarnings("finally")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/descuentosGDTO")
+	public Response getDescuentosGeolocalizados(@QueryParam("longuitud") String longuitud, @QueryParam("latitud") String latitud,@QueryParam("idNivel") Integer idNivel, @QueryParam("idCategoria") Integer idCategoria){
+		ArrayList<DescuentoGeolocalizadoDTO> descuentosGDTO = null;
+		descuentosGDTO = descuentoRepository.getDescuentosGeolocalizados(longuitud, latitud, idNivel, idCategoria);
+		return Response.ok(descuentosGDTO).build();
 	}
 	
 }

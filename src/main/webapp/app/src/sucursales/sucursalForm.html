@@ -33,9 +33,8 @@
 
       <md-input-container class="md-block">
         <label>Informacion Adicional</label>
-        <input md-maxlength="200" name="informacionAdicional" ng-model="ctrl.sucursal.informacionAdicional" required>
+        <input md-maxlength="200" name="informacionAdicional" ng-model="ctrl.sucursal.informacionAdicional">
         <div ng-messages="sucursalForm.informacionAdicional.$error">
-          <div ng-message="required">El campo es requerido.</div>
           <div ng-message="md-maxlength">La informacion debe tener menos de 200 caracteres.</div>
         </div>
       </md-input-container>

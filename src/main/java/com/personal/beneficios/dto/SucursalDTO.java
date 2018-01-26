@@ -34,8 +34,6 @@ public class SucursalDTO {
 				
 		private int idProveedor;
 		
-		private String barrio;
-				
 		private String latitud;
 		
 		private String longitud;
@@ -238,20 +236,6 @@ public class SucursalDTO {
 		 */
 		public void setDistancia(String distancia) {
 			this.distancia = distancia;
-		}
-
-		/**
-		 * @return the barrio
-		 */
-		public String getBarrio() {
-			return barrio;
-		}
-
-		/**
-		 * @param barrio the barrio to set
-		 */
-		public void setBarrio(String barrio) {
-			this.barrio = barrio;
 		}
 
 		

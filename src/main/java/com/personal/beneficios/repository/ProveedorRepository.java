@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.personal.beneficios.dto.ProveedorDTO;
 import com.personal.beneficios.entity.Descuento;
 import com.personal.beneficios.entity.Proveedor;
 
@@ -45,13 +46,16 @@ public class ProveedorRepository {
 	}		
 	
 
-	public void agregarProveedor(Proveedor proveedor){
-		entityManager.persist(proveedor);
+	public void agregarProveedor(ProveedorDTO proveedor){
+		Proveedor proveedorNuevo = new Proveedor();
+		cargarProveedor(proveedor, proveedorNuevo);
+		entityManager.persist(proveedorNuevo);
 	}
 	
 
-	public void editarProveedor(Proveedor proveedor){
-		entityManager.persist(proveedor);
+	public void editarProveedor(ProveedorDTO proveedor){
+		Proveedor proveedorNuevo = entityManager.find(Proveedor.class, proveedor.getIdProveedor());
+		cargarProveedor(proveedor, proveedorNuevo);
 	}
 	
 
@@ -59,5 +63,12 @@ public class ProveedorRepository {
 		Proveedor proveedor = entityManager.find(Proveedor.class, idProveedor);
 
 		entityManager.remove(proveedor);
+	}
+	
+	private void cargarProveedor(ProveedorDTO proveedor, Proveedor proveedorNuevo){
+		proveedorNuevo.setLogo(proveedor.getLogo());
+		proveedorNuevo.setHorarioAtencion(proveedor.getHorarioAtencion());
+		proveedorNuevo.setRazonSocial(proveedor.getRazonSocial());
+		
 	}
 }
