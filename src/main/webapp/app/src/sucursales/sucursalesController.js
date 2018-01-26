@@ -138,7 +138,7 @@ function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedo
     informacionAdicional: null,
     idProvincia: null,
     idLocalidad: null,
-    barrio: null,
+    descripcionBarrio: null,
     idProveedor: proveedorId,
     latitud: null,
     longitud: null,
@@ -152,7 +152,7 @@ function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedo
     self.sucursal.informacionAdicional = sucursal.informacionAdicional;
     self.sucursal.idProvincia = sucursal.provincia.id;
     self.sucursal.idLocalidad = sucursal.localidad.id;
-    self.sucursal.barrio = sucursal.barrio;
+    self.sucursal.descripcionBarrio = sucursal.barrio;
     self.sucursal.idProveedor = sucursal.proveedor.id;
     self.sucursal.latitud = sucursal.latitud;
     self.sucursal.longitud = sucursal.longitud;
@@ -166,7 +166,7 @@ function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedo
   function updateLocalidades(idProvincia) {
     self.localidades = [];
     self.barrios = [];
-    self.sucursal.barrio = null;
+    self.sucursal.descripcionBarrio = null;
     self.cargandoLocalidades = true;
     CommonServices.getLocalidades(idProvincia)
       .then(function (result) {

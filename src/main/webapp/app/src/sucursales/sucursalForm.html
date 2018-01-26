@@ -74,7 +74,7 @@
         </div>
         <md-input-container class="md-block" flex ng-if="ctrl.sucursal.idProvincia == 2" ng-hide="ctrl.cargandoBarrios">
           <label>Barrio</label>
-          <md-select name="barrio" ng-model="ctrl.sucursal.barrio" placeholder="Barrio" ng-disabled="ctrl.sucursal.idLocalidad == null">
+          <md-select name="barrio" ng-model="ctrl.sucursal.descripcionBarrio" placeholder="Barrio" ng-disabled="ctrl.sucursal.idLocalidad == null">
             <md-option ng-repeat="barrio in ctrl.barrios" ng-value="barrio.descripcion">
               {{barrio.descripcion}}
             </md-option>
@@ -82,7 +82,7 @@
         </md-input-container>
         <md-input-container class="md-block" ng-if="ctrl.sucursal.idProvincia != 2">
           <label>Barrio</label>
-          <input md-maxlength="200" name="barrio" ng-model="ctrl.sucursal.barrio">
+          <input md-maxlength="200" name="barrio" ng-model="ctrl.sucursal.descripcionBarrio">
           <div ng-messages="sucursalForm.barrio.$error">
             <div ng-message="md-maxlength">El barrio debe tener menos de 60 caracteres.</div>
           </div>
