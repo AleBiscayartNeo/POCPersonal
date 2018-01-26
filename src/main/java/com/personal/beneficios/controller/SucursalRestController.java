@@ -61,7 +61,7 @@ public class SucursalRestController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{idSucursal}")
-	public Response getSucursalPorID(@PathParam(value = "idsucursal")Integer idSucursal){
+	public Response getSucursalPorID(@PathParam(value = "idSucursal")Integer idSucursal){
 		Sucursal sucursal;
 		
 		sucursal = sucursalRepository.getSucursalPorID(idSucursal);
@@ -103,7 +103,7 @@ public class SucursalRestController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/eliminar")
-	public Response elminarSucursal(@QueryParam(value="idsucursal") Integer idsucursal){
+	public Response elminarSucursal(@QueryParam(value="idSucursal") Integer idsucursal){
 		
 		Sucursal sucursalEliminar = new Sucursal();
 		sucursalEliminar.setId(idsucursal);

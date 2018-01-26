@@ -1,0 +1,139 @@
+<md-dialog aria-label="{{ ctrl.titulo }}" flex="60" flex-sm="80" flex-xs="90">
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>{{ ctrl.titulo }}</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="ctrl.cancel()">
+        <i class="material-icons" aria-label="Close dialog">clear</i>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content layout-padding>
+    <form name="sucursalForm" ng-cloak novalidate>
+
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm="65">
+          <label>Calle</label>
+          <input md-maxlength="60" required name="calle" ng-model="ctrl.sucursal.calle" md-autofocus>
+          <div ng-messages="sucursalForm.calle.$error">
+            <div ng-message="required">El campo es requerido.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex flex-offset-gt-sm="5">
+          <label>Número</label>
+          <input type="number" required name="numero" ng-model="ctrl.sucursal.numero">
+          <div ng-messages="sucursalForm.numero.$error">
+            <div ng-message="required">El campo es requerido.</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <md-input-container class="md-block">
+        <label>Informacion Adicional</label>
+        <input md-maxlength="200" name="informacionAdicional" ng-model="ctrl.sucursal.informacionAdicional" required>
+        <div ng-messages="sucursalForm.informacionAdicional.$error">
+          <div ng-message="required">El campo es requerido.</div>
+          <div ng-message="md-maxlength">La informacion debe tener menos de 200 caracteres.</div>
+        </div>
+      </md-input-container>
+
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex>
+          <label>Provincia</label>
+          <md-select name="provincia" ng-model="ctrl.sucursal.idProvincia" ng-change="ctrl.updateLocalidades(ctrl.sucursal.idProvincia)"
+            placeholder="Provincia" required>
+            <md-option ng-repeat="provincia in ctrl.provincias" ng-value="provincia.id">
+              {{provincia.descripcion}}
+            </md-option>
+          </md-select>
+          <div ng-messages="sucursalForm.provincia.$error">
+            <div ng-message="required">Seleccione una provincia.</div>
+          </div>
+        </md-input-container>
+
+        <div ng-show="ctrl.cargandoLocalidades" flex>
+          <md-progress-circular md-mode="indeterminate" md-diameter="35px" style="margin: 0 auto;"></md-progress-circular>
+        </div>
+        <md-input-container class="md-block" flex ng-hide="ctrl.cargandoLocalidades">
+          <label>Localidad</label>
+          <md-select name="localidad" ng-model="ctrl.sucursal.idLocalidad" placeholder="Localidad" required ng-disabled="ctrl.sucursal.idProvincia == null || ctrl.localidades.length == 0"
+            ng-change="ctrl.updateBarrio(ctrl.sucursal.idLocalidad)">
+            <md-option ng-repeat="localidad in ctrl.localidades" ng-value="localidad.id ">
+              {{localidad.descripcion}}
+            </md-option>
+          </md-select>
+          <div ng-messages="sucursalForm.localidad.$error ">
+            <div ng-message="required ">Seleccione una localidad.</div>
+          </div>
+        </md-input-container>
+
+        <div ng-show="ctrl.cargandoBarrios" flex>
+          <md-progress-circular md-mode="indeterminate" md-diameter="35px" style="margin: 0 auto;"></md-progress-circular>
+        </div>
+        <md-input-container class="md-block" flex ng-hide="ctrl.cargandoBarrios">
+          <label>Barrio</label>
+          <md-select name="barrio" ng-model="ctrl.sucursal.idBarrio" placeholder="Barrio" required ng-disabled="ctrl.sucursal.idLocalidad == null || ctrl.barrios.length == 0">
+            <md-option ng-repeat="barrio in ctrl.barrios" ng-value="barrio.id ">
+              {{barrio.descripcion}}
+            </md-option>
+          </md-select>
+          <div ng-messages="sucursalForm.barrio.$error ">
+            <div ng-message="required ">Seleccione un barrio.</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <!-- 
+      <md-input-container class="md-block" ng-if="ctrl.sucursal.idProvincia != 2">
+        <label>Barrio</label>
+        <input md-maxlength="200" name="barrio" ng-model="ctrl.sucursal.idBarrio">
+        <div ng-messages="sucursalForm.barrio.$error">
+          <div ng-message="md-maxlength">El barrio debe tener menos de 60 caracteres.</div>
+        </div>
+      </md-input-container> 
+      -->
+
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex>
+          <label>Latitud</label>
+          <input required name="latitud" ng-model="ctrl.sucursal.latitud">
+          <div ng-messages="sucursalForm.latitud.$error">
+            <div ng-message="required">El campo es requerido.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex>
+          <label>Longitud</label>
+          <input required name="longitud" ng-model="ctrl.sucursal.longitud">
+          <div ng-messages="sucursalForm.longitud.$error">
+            <div ng-message="required">El campo es requerido.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex>
+          <label>Telefono</label>
+          <input type="number" required name="telefono" ng-model="ctrl.sucursal.telefono">
+          <div ng-messages="sucursalForm.telefono.$error">
+            <div ng-message="required">El campo es requerido.</div>
+          </div>
+        </md-input-container>
+      </div>
+
+
+
+      <md-dialog-actions layout="row ">
+        <span flex></span>
+        <md-button class="md-raised md-primary md-hue-1 " ng-click="ctrl.guardar() " ng-disabled="sucursalForm.$invalid ">
+          Guardar
+        </md-button>
+        <md-button class="md-raised md-warn md-hue-1 " ng-click="ctrl.cancel() ">
+          Cancelar
+        </md-button>
+      </md-dialog-actions>
+    </form>
+
+  </md-dialog-content>
+</md-dialog>
