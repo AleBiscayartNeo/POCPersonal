@@ -72,13 +72,8 @@ public class ProveedorRestController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/nuevo")
 	public Response agregarProveedor(ProveedorDTO proveedor){
-		
-		Proveedor proveedorNuevo = new Proveedor();
-		cargarProveedor(proveedor, proveedorNuevo);		
-		proveedorRepository.agregarProveedor(proveedorNuevo);
-		
+		proveedorRepository.agregarProveedor(proveedor);
 		return Response.status(Status.OK).entity(proveedor).build();
-		
 	}
 	
 	@POST
@@ -86,12 +81,7 @@ public class ProveedorRestController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/editar")
 	public Response editarProveedor(ProveedorDTO proveedor){
-		
-		Proveedor proveedorEditar = new Proveedor();
-		proveedorEditar.setId(proveedor.getIdProveedor());
-		cargarProveedor(proveedor, proveedorEditar);
-		proveedorRepository.editarProveedor(proveedorEditar);
-		
+		proveedorRepository.editarProveedor(proveedor);
 		return Response.status(Status.OK).entity(proveedor).build();
 	}
 	
@@ -104,13 +94,6 @@ public class ProveedorRestController {
 		proveedorRepository.eliminarProveedor(idproveedor);
 		
 		return Response.status(Status.OK).entity(idproveedor).build();
-	}
-	
-	private void cargarProveedor(ProveedorDTO proveedor, Proveedor proveedorNuevo){
-		proveedorNuevo.setLogo(proveedor.getLogo());
-		proveedorNuevo.setHorarioAtencion(proveedor.getHorarioAtencion());
-		proveedorNuevo.setRazonSocial(proveedor.getRazonSocial());
-		
 	}
 	
 	@SuppressWarnings("finally")
