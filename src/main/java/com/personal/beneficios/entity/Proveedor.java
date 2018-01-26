@@ -6,6 +6,7 @@ package com.personal.beneficios.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import org.codehaus.jackson.annotate.JsonBackReference;
 
 /**
@@ -37,7 +39,7 @@ public class Proveedor {
 	@Column(name="logo", nullable=false)
 	private String logo;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "proveedor")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "proveedor", cascade=CascadeType.REMOVE)
 	@JsonBackReference
 	private Set<Sucursal> sucursales = new HashSet<Sucursal>();	
 

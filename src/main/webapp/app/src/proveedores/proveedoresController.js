@@ -129,13 +129,13 @@ angular.module('app.proveedores')
           ProveedoresService.editProveedor(self.proveedor)
             .then(function (result) {
               $rootScope.showSuccess('Proveedor editado con éxito.');
-              $mdDialog.hide();
+              $mdDialog.hide(true);
             });
         } else {
           ProveedoresService.saveProveedor(self.proveedor)
             .then(function (result) {
               $rootScope.showSuccess('Proveedor creado con éxito.');
-              $mdDialog.hide();
+              $mdDialog.hide(true);
             });
         }
       }
