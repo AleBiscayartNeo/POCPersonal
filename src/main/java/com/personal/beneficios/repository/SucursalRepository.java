@@ -65,7 +65,7 @@ public class SucursalRepository {
 	
 	
 	public void editarSucursal(SucursalDTO sucursal){
-		Sucursal sucursalNuevo = new Sucursal();
+		Sucursal sucursalNuevo = entityManager.find(Sucursal.class, sucursal.getId());
 		cargarSucursal(sucursal, sucursalNuevo);
 	}
 	
