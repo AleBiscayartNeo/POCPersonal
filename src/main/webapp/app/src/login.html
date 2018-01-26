@@ -1,4 +1,4 @@
-<md-card flex="flex" flex-gt-sm="50" flex-gt-md="33" style="margin: 40px auto;">
+<md-card flex="flex" flex-gt-sm="30" flex-gt-md="30" style="margin: 40px auto;">
   <md-toolbar>
     <div class="md-toolbar-tools">
       <h2>
@@ -9,7 +9,7 @@
   <md-card-content>
     <form name="loginForm" ng-submit="loginForm.$valid && ctrl.login()" novalidate>
 
-      <md-input-container class="md-block" flex-gt-sm="65">
+      <md-input-container class="md-block" flex>
         <label>Nombre</label>
         <input required name="username" ng-model="ctrl.username" md-autofocus>
         <div ng-messages="loginForm.username.$error">
@@ -17,7 +17,7 @@
         </div>
       </md-input-container>
 
-      <md-input-container class="md-block" flex-gt-sm="65">
+      <md-input-container class="md-block" flex>
         <label>Contraseña</label>
         <input type="password" required name="password" ng-model="ctrl.password">
         <div ng-messages="loginForm.password.$error">

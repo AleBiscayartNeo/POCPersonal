@@ -14,10 +14,10 @@ function SucursalesService($q, $http, APP_CONFIG) {
   /**
    * 
    */
-  function getSucursales() {
+  function getSucursales(idProveedor) {
     return $http({
       method: 'GET',
-      url: APP_CONFIG.API_URL + '/sucursal/all'
+      url: APP_CONFIG.API_URL + '/sucursal/proveedor/' + idProveedor
     }).then(function (response) {
       return response.data;
     }, function (response) {
