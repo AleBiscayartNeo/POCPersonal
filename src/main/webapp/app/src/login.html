@@ -1,0 +1,58 @@
+<md-card flex="flex" flex-gt-sm="50" flex-gt-md="33" style="margin: 40px auto;">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>
+        <img src="./app/assets/img/logo-club-personal-grey.png" alt="">
+      </h2>
+    </div>
+  </md-toolbar>
+  <md-card-content>
+    <form name="loginForm" ng-submit="loginForm.$valid && ctrl.login()" novalidate>
+
+      <md-input-container class="md-block" flex-gt-sm="65">
+        <label>Nombre</label>
+        <input required name="username" ng-model="ctrl.username" md-autofocus>
+        <div ng-messages="loginForm.username.$error">
+          <div ng-message="required">Ingrese un nombre de usuario.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block" flex-gt-sm="65">
+        <label>Contraseña</label>
+        <input type="password" required name="password" ng-model="ctrl.password">
+        <div ng-messages="loginForm.password.$error">
+          <div ng-message="required">Ingrese una contraseña.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container flex>
+        <div class="md-input-message-animation">
+          {{ ctrl.error }}
+        </div>
+      </md-input-container>
+      <br>
+      <md-button type='submit' class="md-raised md-primary">Entrar</md-button>
+
+    </form>
+
+    <!-- <form name="Form">
+      <md-input-container class="md-block">
+        <label>Login</label>
+        <input type="text" name="email" ng-model="vm.formData.email" placeholder="login" required="" />
+        <div ng-messages="Form.email.$error" role="alert" multiple="">
+          <div ng-message="required" class="my-message">Please enter your email.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Password</label>
+        <input type="password" name="password" ng-model="vm.formData.password" placeholder="password" required="" md-maxlength="16"
+        />
+        <div ng-messages="Form.password.$error" role="alert" multiple="">
+          <div ng-message="required" class="my-message">Please enter your password.</div>
+          <div ng-message="md-maxlength" class="my-message">Too long.</div>
+        </div>
+      </md-input-container>
+      <md-button ng-disabled="!Form.$valid" ng-click="vm.submit()" class="md-raised md-primary">&nbsp Login &nbsp</md-button>
+    </form>
+  </md-card-content> -->
+</md-card>
