@@ -6,6 +6,12 @@ package com.personal.beneficios.repository;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+
+
+
+
+
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -14,9 +20,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.personal.beneficios.dto.DescuentoDTO;
 import com.personal.beneficios.dto.DescuentoGeolocalizadoDTO;
 import com.personal.beneficios.dto.SucursalDTO;
+import com.personal.beneficios.entity.Categoria;
 import com.personal.beneficios.entity.Descuento;
+import com.personal.beneficios.entity.Nivel;
+import com.personal.beneficios.entity.Proveedor;
 import com.personal.beneficios.entity.Sucursal;
 
 
@@ -48,12 +58,16 @@ public class DescuentoRepository {
 	return  (Descuento) query.getSingleResult();
 	}	
 	
-	public void agregarDescuento(Descuento descuento){
-		entityManager.persist(descuento);
+	public void agregarDescuento(DescuentoDTO descuento){
+		Descuento descuentoNuevo = new Descuento();
+		cargarDescuento(descuento, descuentoNuevo);
+		entityManager.persist(descuentoNuevo);
 	}
 	
-	public void editarDescuento(Descuento descuento){
-		entityManager.persist(descuento);
+	public void editarDescuento(DescuentoDTO descuento){
+		
+		Descuento descuentoNuevo = entityManager.find(Descuento.class, descuento.getId());
+		cargarDescuento(descuento, descuentoNuevo);
 	}
 	
 	public void eliminarDescuento(Integer idDecuento){
@@ -138,10 +152,16 @@ public class DescuentoRepository {
 				 sucursalDTO.setDistancia(df.format(distancia));
 				 sucursalDTO.setCalle(sucursal.getCalle());
 				 sucursalDTO.setNumero(sucursal.getNumero());
-				 sucursalDTO.setInformacionAdicional(sucursal.getInformacionAdicional());
+				 if (sucursal.getInformacionAdicional() != null){
+					 sucursalDTO.setInformacionAdicional(sucursal.getInformacionAdicional());
+					}
+
 				 sucursalDTO.setDescripcionProvincia(sucursal.getProvincia().getDescripcion());
 				 sucursalDTO.setDescripcionLocalidad(sucursal.getLocalidad().getDescripcion());
-				 sucursalDTO.setDescripcionBarrio(sucursal.getBarrio());
+				 if (sucursal.getBarrio() != null){
+					 sucursalDTO.setDescripcionBarrio(sucursal.getBarrio());
+					}
+				 				 
 				 sucursalDTO.setLatitud(sucursal.getLatitud());
 				 sucursalDTO.setLongitud(sucursal.getLongitud());
 				 sucursalDTO.setTelefono(sucursal.getTelefono());
@@ -155,6 +175,28 @@ public class DescuentoRepository {
 
 		return descGeoDTOs;
 
+	}
+	
+	private void cargarDescuento(DescuentoDTO descuento, Descuento descuentoNuevo){
+		descuentoNuevo.setNombre(descuento.getNombre());
+		descuentoNuevo.setDescripcion(descuento.getDescripcion());
+		descuentoNuevo.setDescripcionCorta(descuento.getDescripcionCorta());
+		descuentoNuevo.setVigenciaDesde(descuento.getVigenciaDesde());
+		descuentoNuevo.setVigenciaHasta(descuento.getVigenciaHasta());
+		descuentoNuevo.setImagen(descuento.getImagen());
+		descuentoNuevo.setLegales(descuento.getLegales());
+		
+		Nivel nivel = new Nivel();
+		nivel.setId(descuento.getIdNivel());
+		descuentoNuevo.setNivel(nivel);
+		
+		Proveedor proveedor = new Proveedor();
+		proveedor.setId(descuento.getIdProveedor());
+		descuentoNuevo.setProveedor(proveedor);
+		
+		Categoria categoria = new Categoria();
+		categoria.setId(descuento.getIdCategoria());
+		descuentoNuevo.setCategoria(categoria);
 	}
 
 }

@@ -22,7 +22,7 @@ function AuthService($http, $location) {
    */
   function login(user, pass) {
     for (var i in users) {
-      if (users[i].username == user.toLowerCase() && users[i].password == pass.toLowerCase()) {
+      if (users[i].username.toLowerCase() == user.toLowerCase() && users[i].password == pass) {
         sessionStorage.setItem("auth", JSON.stringify(users[i]));
         return true;
         break;

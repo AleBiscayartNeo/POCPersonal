@@ -112,8 +112,8 @@ function SucursalesCtrl($routeParams, ProveedoresService, SucursalesService, $md
  * SucursalFormCtrl
  */
 angular.module('app.sucursales').controller('SucursalFormCtrl', SucursalFormCtrl);
-SucursalFormCtrl.$inject = ['SucursalesService', 'CommonServices', '$mdDialog', 'proveedorId', 'sucursal', 'provincias','$rootScope'];
-function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedorId, sucursal, provincias,$rootScope) {
+SucursalFormCtrl.$inject = ['SucursalesService', 'CommonServices', '$mdDialog', 'proveedorId', 'sucursal', 'provincias', '$rootScope'];
+function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedorId, sucursal, provincias, $rootScope) {
   var self = this;
   var isUpdate = angular.isDefined(sucursal);
 
@@ -138,7 +138,7 @@ function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedo
     informacionAdicional: null,
     idProvincia: null,
     idLocalidad: null,
-    idBarrio: null,
+    barrio: null,
     idProveedor: proveedorId,
     latitud: null,
     longitud: null,
@@ -152,7 +152,7 @@ function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedo
     self.sucursal.informacionAdicional = sucursal.informacionAdicional;
     self.sucursal.idProvincia = sucursal.provincia.id;
     self.sucursal.idLocalidad = sucursal.localidad.id;
-    self.sucursal.idBarrio = sucursal.barrio.id;
+    self.sucursal.barrio = sucursal.barrio;
     self.sucursal.idProveedor = sucursal.proveedor.id;
     self.sucursal.latitud = sucursal.latitud;
     self.sucursal.longitud = sucursal.longitud;
@@ -166,6 +166,7 @@ function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedo
   function updateLocalidades(idProvincia) {
     self.localidades = [];
     self.barrios = [];
+    self.sucursal.barrio = null;
     self.cargandoLocalidades = true;
     CommonServices.getLocalidades(idProvincia)
       .then(function (result) {
@@ -179,13 +180,16 @@ function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedo
    * @param {Integer} idLocalidad 
    */
   function updateBarrio(idLocalidad) {
-    self.barrios = [];
-    self.cargandoBarrios = true;
-    CommonServices.getBarrios(idLocalidad)
-      .then(function (result) {
-        self.barrios = result;
-        self.cargandoBarrios = false;
-      });
+    // Solo cargo los barrios si es Capital Federal
+    if (self.sucursal.idProvincia == 2) {
+      self.barrios = [];
+      self.cargandoBarrios = true;
+      CommonServices.getBarrios(idLocalidad)
+        .then(function (result) {
+          self.barrios = result;
+          self.cargandoBarrios = false;
+        });
+    }
   }
 
   /**

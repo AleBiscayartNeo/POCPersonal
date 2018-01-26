@@ -16,19 +16,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.personal.beneficios.dto.DescuentoDTO;
-import com.personal.beneficios.dto.DescuentoGeolocalizadoDTO;
 import com.personal.beneficios.entity.Categoria;
 import com.personal.beneficios.entity.Descuento;
 import com.personal.beneficios.entity.Nivel;
 import com.personal.beneficios.entity.Proveedor;
+import com.personal.beneficios.entity.Provincia;
 import com.personal.beneficios.repository.DescuentoRepository;
 
 /**
@@ -75,13 +72,8 @@ public class DescuentoRestController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/nuevo")
 	public Response agregarDescuento(DescuentoDTO descuento){
-		
-		Descuento descuentoNuevo = new Descuento();
-		cargarDescuento(descuento, descuentoNuevo);
-		
-		descuentoRepository.agregarDescuento(descuentoNuevo);
-		
-		return Response.status(Status.OK).entity(descuentoNuevo).build();
+		descuentoRepository.agregarDescuento(descuento);
+		return Response.status(Status.OK).entity(descuento).build();
 		
 	}
 	
@@ -90,12 +82,8 @@ public class DescuentoRestController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/editar")
 	public Response editarDescuento(DescuentoDTO descuento){
-		
-		Descuento descuentoEditar = descuentoRepository.getDescuentoPorID(descuento.getId());
-		cargarDescuento(descuento, descuentoEditar);
-		descuentoRepository.editarDescuento(descuentoEditar);
-		
-		return Response.status(Status.OK).entity(descuentoEditar).build();
+		descuentoRepository.editarDescuento(descuento);
+		return Response.status(Status.OK).entity(descuento).build();
 	}
 	
 	@POST
@@ -108,42 +96,5 @@ public class DescuentoRestController {
 		
 		return Response.status(Status.OK).entity(idDescuento).build();
 	}
-	
-	private void cargarDescuento(DescuentoDTO descuento, Descuento descuentoNuevo){
-		descuentoNuevo.setNombre(descuento.getNombre());
-		descuentoNuevo.setDescripcion(descuento.getDescripcion());
-		descuentoNuevo.setDescripcionCorta(descuento.getDescripcionCorta());
-		descuentoNuevo.setVigenciaDesde(descuento.getVigenciaDesde());
-		descuentoNuevo.setVigenciaHasta(descuento.getVigenciaHasta());
-		descuentoNuevo.setImagen(descuento.getImagen());
-		descuentoNuevo.setLegales(descuento.getLegales());
-		
-		Nivel nivel = new Nivel();
-		nivel.setId(descuento.getIdNivel());
-		descuentoNuevo.setNivel(nivel);
-		
-		Proveedor proveedor = new Proveedor();
-		proveedor.setId(descuento.getIdProveedor());
-		descuentoNuevo.setProveedor(proveedor);
-		
-		Categoria categoria = new Categoria();
-		categoria.setId(descuento.getIdCategoria());
-		descuentoNuevo.setCategoria(categoria);
-	}
-	
-	@SuppressWarnings("finally")
-	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/descuentosGDTO")
-	public Response getDescuentosGeolocalizados(@QueryParam("longuitud") String longuitud, @QueryParam("latitud") String latitud,@QueryParam("idNivel") Integer idNivel, @QueryParam("idCategoria") Integer idCategoria){
-		ArrayList<DescuentoGeolocalizadoDTO> descuentosGDTO = null;
-		
-		descuentosGDTO = descuentoRepository.getDescuentosGeolocalizados(longuitud, latitud, idNivel, idCategoria);
-		
-			
-		return Response.ok(descuentosGDTO).build();
-	}
-	
 	
 }

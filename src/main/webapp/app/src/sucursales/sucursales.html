@@ -50,7 +50,7 @@
           <td md-cell>{{ sucursal.informacionAdicional }}</td>
           <td md-cell>{{ sucursal.provincia.descripcion }}</td>
           <td md-cell>{{ sucursal.localidad.descripcion }}</td>
-          <td md-cell>{{ sucursal.barrio.descripcion }}</td>
+          <td md-cell>{{ sucursal.barrio }}</td>
           <td md-cell>
             Lat: {{ sucursal.latitud }}
             <br> Long: {{ sucursal.longitud }}
@@ -70,5 +70,5 @@
   </md-table-container>
 
   <md-table-pagination md-limit="ctrl.query.limit" md-limit-options="[5, 10, 15]" md-page="ctrl.query.page" md-total="{{ ctrl.sucursales.length }}"
-    md-page-select></md-table-pagination>
+    md-page-select md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}"></md-table-pagination>
 </md-card>
