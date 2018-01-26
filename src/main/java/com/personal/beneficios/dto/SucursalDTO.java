@@ -40,7 +40,7 @@ public class SucursalDTO {
 		
 		private String longitud;
 				
-		private Integer telefono;
+		private String telefono;
 		
 		private String distancia;
 
@@ -173,14 +173,14 @@ public class SucursalDTO {
 		/**
 		 * @return the telefono
 		 */
-		public Integer getTelefono() {
+		public String getTelefono() {
 			return telefono;
 		}
 
 		/**
 		 * @param telefono the telefono to set
 		 */
-		public void setTelefono(Integer telefono) {
+		public void setTelefono(String telefono) {
 			this.telefono = telefono;
 		}
 

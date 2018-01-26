@@ -59,7 +59,7 @@ public class Sucursal {
 		private String longitud;
 		
 		@Column(name="telefono", nullable=false)
-		private Integer telefono;
+		private String telefono;
 
 		/**
 		 * @return the id
@@ -190,14 +190,14 @@ public class Sucursal {
 		/**
 		 * @return the telefono
 		 */
-		public Integer getTelefono() {
+		public String getTelefono() {
 			return telefono;
 		}
 
 		/**
 		 * @param telefono the telefono to set
 		 */
-		public void setTelefono(Integer telefono) {
+		public void setTelefono(String telefono) {
 			this.telefono = telefono;
 		}
 
