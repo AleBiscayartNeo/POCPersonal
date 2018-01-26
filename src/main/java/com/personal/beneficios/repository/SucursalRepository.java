@@ -13,7 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.personal.beneficios.dto.SucursalDTO;
 import com.personal.beneficios.entity.Descuento;
+import com.personal.beneficios.entity.Localidad;
+import com.personal.beneficios.entity.Proveedor;
+import com.personal.beneficios.entity.Provincia;
 import com.personal.beneficios.entity.Sucursal;
 
 /**
@@ -53,13 +57,16 @@ public class SucursalRepository {
 	}
 	
 	
-	public void agregarSucursal(Sucursal sucursal){
-		entityManager.persist(sucursal);
+	public void agregarSucursal(SucursalDTO sucursal){
+		Sucursal sucursalNuevo = new Sucursal();
+		cargarSucursal(sucursal, sucursalNuevo);
+		entityManager.persist(sucursalNuevo);
 	}
 	
 	
-	public void editarSucursal(Sucursal sucursal){
-		entityManager.persist(sucursal);
+	public void editarSucursal(SucursalDTO sucursal){
+		Sucursal sucursalNuevo = new Sucursal();
+		cargarSucursal(sucursal, sucursalNuevo);
 	}
 	
 	
@@ -67,5 +74,35 @@ public class SucursalRepository {
 		Sucursal sucursal = entityManager.find(Sucursal.class, idSucursal);
 
 		entityManager.remove(sucursal);
+	}
+	
+	private void cargarSucursal(SucursalDTO sucursal, Sucursal sucursalNuevo){
+		
+		sucursalNuevo.setCalle(sucursal.getCalle());
+		sucursalNuevo.setNumero(sucursal.getNumero());
+		if (sucursal.getInformacionAdicional() != null){
+			sucursalNuevo.setInformacionAdicional(sucursal.getInformacionAdicional());
+		}			
+		sucursalNuevo.setTelefono(sucursal.getTelefono());
+		sucursalNuevo.setLongitud(sucursal.getLongitud());
+		sucursalNuevo.setLatitud(sucursal.getLatitud());
+		
+		if (sucursal.getDescripcionBarrio() != null){
+			sucursalNuevo.setBarrio(sucursal.getDescripcionBarrio());
+		}
+		Provincia provincia = new Provincia();
+		provincia.setId(sucursal.getIdProvincia());
+		sucursalNuevo.setProvincia(provincia);
+		
+		Localidad localidad =  new Localidad();
+		localidad.setId(sucursal.getIdLocalidad());
+		sucursalNuevo.setLocalidad(localidad);
+		
+		sucursalNuevo.setBarrio(sucursal.getDescripcionBarrio());
+		
+		Proveedor proveedor = new Proveedor();
+		proveedor.setId(sucursal.getIdProveedor());
+		sucursalNuevo.setProveedor(proveedor);
+		
 	}
 }
