@@ -140,10 +140,16 @@ public class DescuentoRepository {
 				 sucursalDTO.setDistancia(df.format(distancia));
 				 sucursalDTO.setCalle(sucursal.getCalle());
 				 sucursalDTO.setNumero(sucursal.getNumero());
-				 sucursalDTO.setInformacionAdicional(sucursal.getInformacionAdicional());
+				 if (sucursal.getInformacionAdicional() != null){
+					 sucursalDTO.setInformacionAdicional(sucursal.getInformacionAdicional());
+					}
+
 				 sucursalDTO.setDescripcionProvincia(sucursal.getProvincia().getDescripcion());
 				 sucursalDTO.setDescripcionLocalidad(sucursal.getLocalidad().getDescripcion());
-				 sucursalDTO.setDescripcionBarrio(sucursal.getBarrio());
+				 if (sucursal.getBarrio() != null){
+					 sucursalDTO.setDescripcionBarrio(sucursal.getBarrio());
+					}
+				 				 
 				 sucursalDTO.setLatitud(sucursal.getLatitud());
 				 sucursalDTO.setLongitud(sucursal.getLongitud());
 				 sucursalDTO.setTelefono(sucursal.getTelefono());
