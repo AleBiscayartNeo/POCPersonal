@@ -16,10 +16,15 @@ angular.module('app.proveedores')
       self.nuevo = nuevo;
       self.editar = editar;
       self.eliminar = eliminar;
-
-      self.progress = ProveedoresService.getProveedores().then(function (result) {
-        self.proveedores = result;
-      });
+      
+      // Inicializo la tabla de sucursales
+      function init() {
+        self.progress = ProveedoresService.getProveedores().then(function (result) {
+            self.proveedores = result;
+        });
+      }
+      
+      init();
 
       /**
        * 
@@ -63,6 +68,7 @@ angular.module('app.proveedores')
             .ok('Eliminar')
             .cancel('Cancelar')).then(function () {
               ProveedoresService.deleteProveedor(proveedor.id).then(function (result) {
+            	init();
                 console.log('Eliminar: ' + proveedor.id);
               });
             }, function () {
@@ -84,7 +90,12 @@ angular.module('app.proveedores')
           targetEvent: event,
           clickOutsideToClose: false,
           fullscreen: false
-        });
+        })
+        .then(function (update) {
+            if (update) {
+                init();
+              };
+            }, function () { });
       }
 
     }])
@@ -100,13 +111,17 @@ angular.module('app.proveedores')
       self.titulo = isUpdate ? "Editar Proveedor" : "Nuevo Proveedor";
 
       self.proveedor = {
+        idProveedor: null,
         razonSocial: null,
         horarioAtencion: null,
         logo: null
       }
 
       if (isUpdate) {
-        self.proveedor = proveedor;
+        self.proveedor.idProveedor = proveedor.id;
+        self.proveedor.razonSocial = proveedor.razonSocial;
+        self.proveedor.horarioAtencion = proveedor.horarioAtencion;
+        self.proveedor.logo = proveedor.logo;
       }
 
       self.guardar = function () {
@@ -114,13 +129,13 @@ angular.module('app.proveedores')
           ProveedoresService.editProveedor(self.proveedor)
             .then(function (result) {
               $rootScope.showSuccess('Proveedor editado con éxito.');
-              $mdDialog.hide();
+              $mdDialog.hide(true);
             });
         } else {
           ProveedoresService.saveProveedor(self.proveedor)
             .then(function (result) {
               $rootScope.showSuccess('Proveedor creado con éxito.');
-              $mdDialog.hide();
+              $mdDialog.hide(true);
             });
         }
       }

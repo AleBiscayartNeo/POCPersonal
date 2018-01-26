@@ -116,12 +116,7 @@ public class SucursalRestController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/eliminar")
 	public Response elminarSucursal(@QueryParam(value="idSucursal") Integer idsucursal){
-		
-		Sucursal sucursalEliminar = new Sucursal();
-		sucursalEliminar.setId(idsucursal);
-		
-		sucursalRepository.eliminarSucursal(sucursalEliminar);
-		
+		sucursalRepository.eliminarSucursal(idsucursal);
 		return Response.status(Status.OK).entity(idsucursal).build();
 	}
 	

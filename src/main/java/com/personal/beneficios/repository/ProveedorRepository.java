@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.personal.beneficios.entity.Descuento;
 import com.personal.beneficios.entity.Proveedor;
 
 /**
@@ -54,7 +55,9 @@ public class ProveedorRepository {
 	}
 	
 
-	public void eliminarProveedor(Proveedor proveedor){
+	public void eliminarProveedor(Integer idProveedor){
+		Proveedor proveedor = entityManager.find(Proveedor.class, idProveedor);
+
 		entityManager.remove(proveedor);
 	}
 }
