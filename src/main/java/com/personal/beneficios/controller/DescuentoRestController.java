@@ -16,16 +16,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.personal.beneficios.dto.DescuentoDTO;
+import com.personal.beneficios.dto.DescuentoGeolocalizadoDTO;
 import com.personal.beneficios.entity.Categoria;
 import com.personal.beneficios.entity.Descuento;
 import com.personal.beneficios.entity.Nivel;
 import com.personal.beneficios.entity.Proveedor;
-import com.personal.beneficios.entity.Provincia;
 import com.personal.beneficios.repository.DescuentoRepository;
 
 /**
@@ -88,10 +91,8 @@ public class DescuentoRestController {
 	@Path("/editar")
 	public Response editarDescuento(DescuentoDTO descuento){
 		
-		Descuento descuentoEditar = new Descuento();
-		descuentoEditar.setId(descuento.getId());
+		Descuento descuentoEditar = descuentoRepository.getDescuentoPorID(descuento.getId());
 		cargarDescuento(descuento, descuentoEditar);
-		
 		descuentoRepository.editarDescuento(descuentoEditar);
 		
 		return Response.status(Status.OK).entity(descuentoEditar).build();
@@ -103,10 +104,7 @@ public class DescuentoRestController {
 	@Path("/eliminar")
 	public Response elminarDescuento(@QueryParam(value="idDescuento") Integer idDescuento){
 		
-		Descuento descuentoEliminar = new Descuento();
-		descuentoEliminar.setId(idDescuento);
-		
-		descuentoRepository.eliminarDescuento(descuentoEliminar);
+		descuentoRepository.eliminarDescuento(idDescuento);
 		
 		return Response.status(Status.OK).entity(idDescuento).build();
 	}
@@ -132,4 +130,20 @@ public class DescuentoRestController {
 		categoria.setId(descuento.getIdCategoria());
 		descuentoNuevo.setCategoria(categoria);
 	}
+	
+	@SuppressWarnings("finally")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/descuentosGDTO")
+	public Response getDescuentosGeolocalizados(@QueryParam("longuitud") String longuitud, @QueryParam("latitud") String latitud,@QueryParam("idNivel") Integer idNivel, @QueryParam("idCategoria") Integer idCategoria){
+		ArrayList<DescuentoGeolocalizadoDTO> descuentosGDTO = null;
+		
+		descuentosGDTO = descuentoRepository.getDescuentosGeolocalizados(longuitud, latitud, idNivel, idCategoria);
+		
+			
+		return Response.ok(descuentosGDTO).build();
+	}
+	
+	
 }

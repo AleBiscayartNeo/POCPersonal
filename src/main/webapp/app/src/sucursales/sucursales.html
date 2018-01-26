@@ -1,0 +1,74 @@
+<md-card>
+  <md-progress-linear ng-show="ctrl.proveedor == null" md-mode="indeterminate"></md-progress-linear>
+
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">
+        <strong>Proveedor:</strong>
+        {{ ctrl.proveedor.razonSocial }}
+      </span>
+      <span class="md-subhead">
+        <strong>Horarios de atencion:</strong> {{ ctrl.proveedor.horarioAtencion }}
+      </span>
+    </md-card-title-text>
+    <md-card-title-media>
+      <div class="md-media-sm card-media">
+        <img ng-src="{{ ctrl.proveedor.logo }}" alt="Logo">
+      </div>
+    </md-card-title-media>
+  </md-card-title>
+</md-card>
+
+<md-card>
+  <md-toolbar class="md-table-toolbar md-accent md-hue-1">
+    <div class="md-toolbar-tools">
+      <h2>Sucursales</h2>
+      <div flex></div>
+      <md-button class="md-raised md-primary md-hue-1" ng-click="ctrl.nuevo($event)">Nueva</md-button>
+    </div>
+  </md-toolbar>
+
+  <md-table-container>
+    <table md-table md-progress="ctrl.progress">
+      <thead md-head md-order="ctrl.query.order">
+        <tr md-row>
+          <th md-column md-order-by="calle">Calle</th>
+          <th md-column>Número</th>
+          <th md-column>Información Adicional</th>
+          <th md-column md-order-by="provincia.descripcion">Provincia</th>
+          <th md-column md-order-by="localidad.descripcion">Localidad</th>
+          <th md-column md-order-by="barrio.descripcion">Barrio</th>
+          <th md-column>Ubicación</th>
+          <th md-column>Telefono</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row ng-repeat="sucursal in ctrl.sucursales | orderBy:ctrl.query.order | limitTo: ctrl.query.limit: (ctrl.query.page - 1) * ctrl.query.limit">
+          <td md-cell>{{ sucursal.calle }}</td>
+          <td md-cell>{{ sucursal.numero }}</td>
+          <td md-cell>{{ sucursal.informacionAdicional }}</td>
+          <td md-cell>{{ sucursal.provincia.descripcion }}</td>
+          <td md-cell>{{ sucursal.localidad.descripcion }}</td>
+          <td md-cell>{{ sucursal.barrio.descripcion }}</td>
+          <td md-cell>
+            Lat: {{ sucursal.latitud }}
+            <br> Long: {{ sucursal.longitud }}
+          </td>
+          <td md-cell>{{ sucursal.telefono }}</td>
+          <td md-cell layout="row" layout-align="end center">
+            <md-button ng-click="ctrl.editar($event, sucursal)" class="md-fab md-mini" aria-label="Editar Sucursal">
+              <i class="material-icons">create</i>
+            </md-button>
+            <md-button ng-click="ctrl.eliminar($event, sucursal)" class="md-fab md-mini" aria-label="Eliminar Sucursal">
+              <i class="material-icons">delete</i>
+            </md-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+
+  <md-table-pagination md-limit="ctrl.query.limit" md-limit-options="[5, 10, 15]" md-page="ctrl.query.page" md-total="{{ ctrl.sucursales.length }}"
+    md-page-select></md-table-pagination>
+</md-card>

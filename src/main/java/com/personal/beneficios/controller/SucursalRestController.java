@@ -61,12 +61,25 @@ public class SucursalRestController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{idSucursal}")
-	public Response getSucursalPorID(@PathParam(value = "idsucursal")Integer idSucursal){
+	public Response getSucursalPorID(@PathParam(value = "idSucursal")Integer idSucursal){
 		Sucursal sucursal;
 		
 		sucursal = sucursalRepository.getSucursalPorID(idSucursal);
 		
 		return Response.ok(sucursal).build();
+	}
+	
+	@SuppressWarnings("finally")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/proveedor/{idProveedor}")
+	public Response getSucursalPorIdProveedor(@PathParam(value = "idProveedor")Integer idProveedor){
+		ArrayList<Sucursal> sucursales;
+		
+		sucursales = sucursalRepository.getSucursalPorIdProveedor(idProveedor);
+		
+		return Response.ok(sucursales).build();
 	}
 	
 	@POST
@@ -103,7 +116,7 @@ public class SucursalRestController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/eliminar")
-	public Response elminarSucursal(@QueryParam(value="idsucursal") Integer idsucursal){
+	public Response elminarSucursal(@QueryParam(value="idSucursal") Integer idsucursal){
 		
 		Sucursal sucursalEliminar = new Sucursal();
 		sucursalEliminar.setId(idsucursal);

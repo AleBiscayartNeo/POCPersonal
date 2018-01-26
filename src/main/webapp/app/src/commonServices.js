@@ -6,8 +6,8 @@ function CommonServices($http, APP_CONFIG) {
 
   return {
     getProvincias: getProvincias,
-    getLocalidad: getLocalidad,
-    getBarrio: getBarrio,
+    getLocalidades: getLocalidades,
+    getBarrios: getBarrios,
     getCategorias: getCategorias
   };
 
@@ -29,7 +29,7 @@ function CommonServices($http, APP_CONFIG) {
    * 
    * @param {Integer} idProvincia 
    */
-  function getLocalidad(idProvincia) {
+  function getLocalidades(idProvincia) {
     return $http({
       method: 'GET',
       url: APP_CONFIG.API_URL + "/localidad/" + idProvincia
@@ -44,7 +44,7 @@ function CommonServices($http, APP_CONFIG) {
    * 
    * @param {Integer} idLocalidad 
    */
-  function getBarrio(idLocalidad) {
+  function getBarrios(idLocalidad) {
     return $http({
       method: 'GET',
       url: APP_CONFIG.API_URL + "/barrio/" + idLocalidad
