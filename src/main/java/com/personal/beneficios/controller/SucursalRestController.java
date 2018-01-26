@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.personal.beneficios.dto.SucursalDTO;
-import com.personal.beneficios.entity.Barrio;
 import com.personal.beneficios.entity.Localidad;
 import com.personal.beneficios.entity.Proveedor;
 import com.personal.beneficios.entity.Provincia;
@@ -143,9 +142,7 @@ public class SucursalRestController {
 		localidad.setId(sucursal.getIdLocalidad());
 		sucursalNuevo.setLocalidad(localidad);
 		
-		Barrio barrio = new Barrio();
-		barrio.setId(sucursal.getIdBarrio());
-		sucursalNuevo.setBarrio(barrio);
+		sucursalNuevo.setBarrio(sucursal.getBarrio());
 		
 		Proveedor proveedor = new Proveedor();
 		proveedor.setId(sucursal.getIdProveedor());

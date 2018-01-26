@@ -137,7 +137,7 @@ public class ProveedorRestController {
 				SucursalDTO sucursalDTO = null;
 				for (Sucursal sucursal : proveedor.getSucursales()) {
 					sucursalDTO = new SucursalDTO();
-					sucursalDTO.setDescripcionBarrio(sucursal.getBarrio() != null ? sucursal.getBarrio().getDescripcion() : "");
+					sucursalDTO.setDescripcionBarrio(sucursal.getBarrio() != null ? sucursal.getBarrio() : "");
 					sucursalDTO.setCalle(sucursal.getCalle());
 					sucursalDTO.setId(sucursal.getId());
 					sucursalDTO.setInformacionAdicional(sucursal.getInformacionAdicional());

@@ -6,8 +6,6 @@ package com.personal.beneficios.repository;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -143,7 +141,7 @@ public class DescuentoRepository {
 				 sucursalDTO.setInformacionAdicional(sucursal.getInformacionAdicional());
 				 sucursalDTO.setDescripcionProvincia(sucursal.getProvincia().getDescripcion());
 				 sucursalDTO.setDescripcionLocalidad(sucursal.getLocalidad().getDescripcion());
-				 sucursalDTO.setDescripcionBarrio(sucursal.getBarrio().getDescripcion());
+				 sucursalDTO.setDescripcionBarrio(sucursal.getBarrio());
 				 sucursalDTO.setLatitud(sucursal.getLatitud());
 				 sucursalDTO.setLongitud(sucursal.getLongitud());
 				 sucursalDTO.setTelefono(sucursal.getTelefono());
