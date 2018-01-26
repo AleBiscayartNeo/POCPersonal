@@ -37,19 +37,19 @@ public class Sucursal {
 		private String informacionAdicional;
 		
 		@ManyToOne(fetch = FetchType.EAGER)
-		@JoinColumn(name = "idProvincia", insertable = false, updatable = false)
+		@JoinColumn(name = "idProvincia")
 		private Provincia provincia;
 		
 		@ManyToOne(fetch = FetchType.EAGER)
-		@JoinColumn(name = "idLocalidad", insertable = false, updatable = false)
+		@JoinColumn(name = "idLocalidad")
 		private Localidad localidad;
 		
 		@ManyToOne(fetch = FetchType.EAGER)
-		@JoinColumn(name = "idBarrio", insertable = false, updatable = false)
+		@JoinColumn(name = "idBarrio")
 		private Barrio barrio;
 					
 		@ManyToOne(fetch = FetchType.EAGER)
-		@JoinColumn(name = "idProveedor", insertable = false, updatable = false)
+		@JoinColumn(name = "idProveedor")
 		private Proveedor proveedor;
 					
 		@Column(name="latitud", nullable=false)

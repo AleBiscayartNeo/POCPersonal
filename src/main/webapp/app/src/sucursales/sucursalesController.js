@@ -111,8 +111,8 @@ function SucursalesCtrl($routeParams, ProveedoresService, SucursalesService, $md
  * SucursalFormCtrl
  */
 angular.module('app.sucursales').controller('SucursalFormCtrl', SucursalFormCtrl);
-SucursalFormCtrl.$inject = ['SucursalesService', 'CommonServices', '$mdDialog', 'proveedorId', 'sucursal', 'provincias'];
-function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedorId, sucursal, provincias) {
+SucursalFormCtrl.$inject = ['SucursalesService', 'CommonServices', '$mdDialog', 'proveedorId', 'sucursal', 'provincias','$rootScope'];
+function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedorId, sucursal, provincias,$rootScope) {
   var self = this;
   var isUpdate = angular.isDefined(sucursal);
 

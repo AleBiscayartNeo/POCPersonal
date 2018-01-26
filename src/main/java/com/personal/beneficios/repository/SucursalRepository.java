@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.personal.beneficios.entity.Descuento;
 import com.personal.beneficios.entity.Sucursal;
 
 /**
@@ -62,7 +63,9 @@ public class SucursalRepository {
 	}
 	
 	
-	public void eliminarSucursal(Sucursal sucursal){
+	public void eliminarSucursal(Integer idSucursal){
+		Sucursal sucursal = entityManager.find(Sucursal.class, idSucursal);
+
 		entityManager.remove(sucursal);
 	}
 }

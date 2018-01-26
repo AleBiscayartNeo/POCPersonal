@@ -101,12 +101,9 @@ public class ProveedorRestController {
 	@Path("/eliminar")
 	public Response elminarProveedor(@QueryParam(value="idProveedor") Integer idproveedor){
 		
-		Proveedor proveedorEliminar = new Proveedor();
-		proveedorEliminar.setId(idproveedor);
+		proveedorRepository.eliminarProveedor(idproveedor);
 		
-		proveedorRepository.eliminarProveedor(proveedorEliminar);
-		
-		return Response.status(Status.OK).entity(proveedorEliminar).build();
+		return Response.status(Status.OK).entity(idproveedor).build();
 	}
 	
 	private void cargarProveedor(ProveedorDTO proveedor, Proveedor proveedorNuevo){

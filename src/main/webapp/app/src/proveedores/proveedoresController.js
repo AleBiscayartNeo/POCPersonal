@@ -16,10 +16,15 @@ angular.module('app.proveedores')
       self.nuevo = nuevo;
       self.editar = editar;
       self.eliminar = eliminar;
-
-      self.progress = ProveedoresService.getProveedores().then(function (result) {
-        self.proveedores = result;
-      });
+      
+      // Inicializo la tabla de sucursales
+      function init() {
+        self.progress = ProveedoresService.getProveedores().then(function (result) {
+            self.proveedores = result;
+        });
+      }
+      
+      init();
 
       /**
        * 
@@ -63,6 +68,7 @@ angular.module('app.proveedores')
             .ok('Eliminar')
             .cancel('Cancelar')).then(function () {
               ProveedoresService.deleteProveedor(proveedor.id).then(function (result) {
+            	init();
                 console.log('Eliminar: ' + proveedor.id);
               });
             }, function () {
@@ -84,7 +90,12 @@ angular.module('app.proveedores')
           targetEvent: event,
           clickOutsideToClose: false,
           fullscreen: false
-        });
+        })
+        .then(function (update) {
+            if (update) {
+                init();
+              };
+            }, function () { });
       }
 
     }])
