@@ -119,8 +119,9 @@ function DescuentoFormCtrl($rootScope, descuento, proveedores, categorias, Descu
   self.categorias = categorias || [];
 
   self.niveles = [
-    { id: 1, descripcion: 'NIVEL 1' },
-    { id: 2, descripcion: 'NIVEL 2' }
+    { id: 1, descripcion: 'BASIC' },
+    { id: 2, descripcion: 'FULL' },
+    { id: 3, descripcion: 'TODOS' }
   ];
 
   self.descuento = {
