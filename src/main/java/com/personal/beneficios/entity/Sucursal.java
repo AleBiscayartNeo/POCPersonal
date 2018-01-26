@@ -44,9 +44,9 @@ public class Sucursal {
 		@JoinColumn(name = "idLocalidad")
 		private Localidad localidad;
 		
-		@ManyToOne(fetch = FetchType.EAGER)
-		@JoinColumn(name = "idBarrio")
-		private Barrio barrio;
+		
+		@JoinColumn(name = "barrio")
+		private String barrio;
 					
 		@ManyToOne(fetch = FetchType.EAGER)
 		@JoinColumn(name = "idProveedor")
@@ -146,20 +146,6 @@ public class Sucursal {
 		}
 
 		/**
-		 * @return the barrio
-		 */
-		public Barrio getBarrio() {
-			return barrio;
-		}
-
-		/**
-		 * @param barrio the barrio to set
-		 */
-		public void setBarrio(Barrio barrio) {
-			this.barrio = barrio;
-		}
-
-		/**
 		 * @return the proveedor
 		 */
 		public Proveedor getProveedor() {
@@ -213,6 +199,20 @@ public class Sucursal {
 		 */
 		public void setTelefono(Integer telefono) {
 			this.telefono = telefono;
+		}
+
+		/**
+		 * @return the barrio
+		 */
+		public String getBarrio() {
+			return barrio;
+		}
+
+		/**
+		 * @param barrio the barrio to set
+		 */
+		public void setBarrio(String barrio) {
+			this.barrio = barrio;
 		}
 
 
