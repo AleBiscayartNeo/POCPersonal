@@ -42,6 +42,6 @@
   </md-table-container>
 
   <md-table-pagination md-limit="ctrl.query.limit" md-limit-options="[5, 10, 15]" md-page="ctrl.query.page" md-total="{{ ctrl.proveedores.length }}"
-    md-on-paginate="ctrl.getProveedores" md-page-select></md-table-pagination>
+    md-on-paginate="ctrl.getProveedores" md-page-select md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}"></md-table-pagination>
 
 </md-card>
