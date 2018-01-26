@@ -70,31 +70,26 @@
           </div>
         </md-input-container>
 
-        <div ng-show="ctrl.cargandoBarrios" flex>
+        <div ng-show="ctrl.cargandoBarrios && ctrl.sucursal.idProvincia == 2" flex>
           <md-progress-circular md-mode="indeterminate" md-diameter="35px" style="margin: 0 auto;"></md-progress-circular>
         </div>
-        <md-input-container class="md-block" flex ng-hide="ctrl.cargandoBarrios">
+        <md-input-container class="md-block" flex ng-if="ctrl.sucursal.idProvincia == 2" ng-hide="ctrl.cargandoBarrios">
           <label>Barrio</label>
-          <md-select name="barrio" ng-model="ctrl.sucursal.idBarrio" placeholder="Barrio" required ng-disabled="ctrl.sucursal.idLocalidad == null || ctrl.barrios.length == 0">
-            <md-option ng-repeat="barrio in ctrl.barrios" ng-value="barrio.id ">
+          <md-select name="barrio" ng-model="ctrl.sucursal.barrio" placeholder="Barrio" ng-disabled="ctrl.sucursal.idLocalidad == null">
+            <md-option ng-repeat="barrio in ctrl.barrios" ng-value="barrio.descripcion">
               {{barrio.descripcion}}
             </md-option>
           </md-select>
-          <div ng-messages="sucursalForm.barrio.$error ">
-            <div ng-message="required ">Seleccione un barrio.</div>
+        </md-input-container>
+        <md-input-container class="md-block" ng-if="ctrl.sucursal.idProvincia != 2">
+          <label>Barrio</label>
+          <input md-maxlength="200" name="barrio" ng-model="ctrl.sucursal.barrio">
+          <div ng-messages="sucursalForm.barrio.$error">
+            <div ng-message="md-maxlength">El barrio debe tener menos de 60 caracteres.</div>
           </div>
         </md-input-container>
       </div>
 
-      <!-- 
-      <md-input-container class="md-block" ng-if="ctrl.sucursal.idProvincia != 2">
-        <label>Barrio</label>
-        <input md-maxlength="200" name="barrio" ng-model="ctrl.sucursal.idBarrio">
-        <div ng-messages="sucursalForm.barrio.$error">
-          <div ng-message="md-maxlength">El barrio debe tener menos de 60 caracteres.</div>
-        </div>
-      </md-input-container> 
-      -->
 
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex>
@@ -115,7 +110,7 @@
 
         <md-input-container class="md-block" flex>
           <label>Telefono</label>
-          <input type="number" required name="telefono" ng-model="ctrl.sucursal.telefono">
+          <input required name="telefono" ng-model="ctrl.sucursal.telefono">
           <div ng-messages="sucursalForm.telefono.$error">
             <div ng-message="required">El campo es requerido.</div>
           </div>
