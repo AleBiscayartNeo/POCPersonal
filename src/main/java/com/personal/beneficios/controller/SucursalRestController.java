@@ -131,10 +131,9 @@ public class SucursalRestController {
 		sucursalNuevo.setLongitud(sucursal.getLongitud());
 		sucursalNuevo.setLatitud(sucursal.getLatitud());
 		
-		if (sucursal.getBarrio() != null){
-			sucursalNuevo.setBarrio(sucursal.getBarrio());
+		if (sucursal.getDescripcionBarrio() != null){
+			sucursalNuevo.setBarrio(sucursal.getDescripcionBarrio());
 		}
-		
 		Provincia provincia = new Provincia();
 		provincia.setId(sucursal.getIdProvincia());
 		sucursalNuevo.setProvincia(provincia);
@@ -143,7 +142,7 @@ public class SucursalRestController {
 		localidad.setId(sucursal.getIdLocalidad());
 		sucursalNuevo.setLocalidad(localidad);
 		
-		sucursalNuevo.setBarrio(sucursal.getBarrio());
+		sucursalNuevo.setBarrio(sucursal.getDescripcionBarrio());
 		
 		Proveedor proveedor = new Proveedor();
 		proveedor.setId(sucursal.getIdProveedor());
