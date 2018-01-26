@@ -111,13 +111,17 @@ angular.module('app.proveedores')
       self.titulo = isUpdate ? "Editar Proveedor" : "Nuevo Proveedor";
 
       self.proveedor = {
+        idProveedor: null,
         razonSocial: null,
         horarioAtencion: null,
         logo: null
       }
 
       if (isUpdate) {
-        self.proveedor = proveedor;
+        self.proveedor.idProveedor = proveedor.id;
+        self.proveedor.razonSocial = proveedor.razonSocial;
+        self.proveedor.horarioAtencion = proveedor.horarioAtencion;
+        self.proveedor.logo = proveedor.logo;
       }
 
       self.guardar = function () {
