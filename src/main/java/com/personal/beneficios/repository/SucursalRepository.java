@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.personal.beneficios.dto.SucursalDTO;
-import com.personal.beneficios.entity.Descuento;
 import com.personal.beneficios.entity.Localidad;
 import com.personal.beneficios.entity.Proveedor;
 import com.personal.beneficios.entity.Provincia;
@@ -48,6 +47,7 @@ public class SucursalRepository {
 	return  (Sucursal) query.getSingleResult();
 	}	
 	
+	@SuppressWarnings("unchecked")
 	@Transactional(readOnly=true)
 	public ArrayList<Sucursal> getSucursalPorIdProveedor(Integer idProveedor) {
 	

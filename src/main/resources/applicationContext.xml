@@ -18,12 +18,11 @@
 		<property name="caches">
 			<set>
 				<bean
-					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" id="provinciaCache" />
+					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" id="catalogoCache" />
 				<bean
-					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" id="localidadCache" />
+					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" id="detalleCache" />
 				<bean
-					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" id="barrioCache" />	
-				
+					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" id="cercanoCache" />	
 			</set>
 		</property>
 	</bean>

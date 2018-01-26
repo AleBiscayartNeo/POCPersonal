@@ -18,15 +18,14 @@ import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Component;
 
 import com.personal.beneficios.dto.DescuentoDTO;
 import com.personal.beneficios.dto.DescuentoGeolocalizadoDTO;
-import com.personal.beneficios.entity.Categoria;
 import com.personal.beneficios.entity.Descuento;
-import com.personal.beneficios.entity.Nivel;
-import com.personal.beneficios.entity.Proveedor;
-import com.personal.beneficios.entity.Provincia;
 import com.personal.beneficios.repository.DescuentoRepository;
 
 /**
@@ -42,7 +41,6 @@ public class DescuentoRestController {
 	private DescuentoRepository descuentoRepository;
 		
 	
-	@SuppressWarnings("finally")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -55,7 +53,7 @@ public class DescuentoRestController {
 		return Response.ok(descuentos).build();
 	}
 	
-	@SuppressWarnings("finally")
+	@Cacheable("detalleCache")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -68,6 +66,7 @@ public class DescuentoRestController {
 		return Response.ok(descuento).build();
 	}
 	
+	@Caching(evict = {@CacheEvict(value="catalogoCache", allEntries=true), @CacheEvict (value="detalleCache", allEntries=true), @CacheEvict (value="cercanoCache", allEntries=true)})
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -78,6 +77,7 @@ public class DescuentoRestController {
 		
 	}
 	
+	@Caching(evict = {@CacheEvict(value="catalogoCache", allEntries=true), @CacheEvict (value="detalleCache", allEntries=true), @CacheEvict (value="cercanoCache", allEntries=true)})
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -87,6 +87,7 @@ public class DescuentoRestController {
 		return Response.status(Status.OK).entity(descuento).build();
 	}
 	
+	@Caching(evict = {@CacheEvict(value="catalogoCache", allEntries=true), @CacheEvict (value="detalleCache", allEntries=true), @CacheEvict (value="cercanoCache", allEntries=true)})
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -98,7 +99,7 @@ public class DescuentoRestController {
 		return Response.status(Status.OK).entity(idDescuento).build();
 	}
 	
-	@SuppressWarnings("finally")
+	@Cacheable("cercanoCache")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

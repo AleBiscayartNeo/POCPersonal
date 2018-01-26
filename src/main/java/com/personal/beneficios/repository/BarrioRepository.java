@@ -28,6 +28,7 @@ public class BarrioRepository {
 	public EntityManager entityManager;
 	
 	
+	@SuppressWarnings("unchecked")
 	@Transactional(readOnly=true)
 	public ArrayList<Barrio> getBarrioPorLocalidad(Integer idLocalidad) {
 	

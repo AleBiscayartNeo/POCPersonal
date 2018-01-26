@@ -31,8 +31,6 @@ public class ProvinciaRestController {
 	@Qualifier("provinciaRepository")
 	private ProvinciaRepository provinciaRepository;
 		
-	
-	@SuppressWarnings("finally")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

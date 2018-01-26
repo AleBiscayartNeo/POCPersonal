@@ -33,8 +33,6 @@ public class LocalidadRestController {
 	@Qualifier("localidadRepository")
 	private LocalidadRepository localidadRepository;
 		
-	
-	@SuppressWarnings("finally")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
