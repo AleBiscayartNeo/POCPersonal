@@ -27,6 +27,7 @@ public class LocalidadRepository {
 	public EntityManager entityManager;
 	
 	
+	@SuppressWarnings("unchecked")
 	@Transactional(readOnly=true)
 	public ArrayList<Localidad> getLocalidadPorProvincia(Integer idProvincia) {
 	

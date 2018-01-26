@@ -21,10 +21,10 @@ public class CatalogoRepository {
 	@PersistenceContext
 	public EntityManager entityManager;
 	
+	@SuppressWarnings("unchecked")
 	@Transactional(readOnly=true)
 	public CatalogoPorNivelDTO getCatalogoFiltrado(Integer idNivel, Integer idCategoria) {
 		
-		ArrayList<CatalogoPorNivelDTO> resultado = new ArrayList<CatalogoPorNivelDTO>();
 		ArrayList<Categoria> categorias = null;
 		ArrayList<Descuento> descuentos = null;
 		CatalogoPorNivelDTO catalogoDto = new CatalogoPorNivelDTO();;

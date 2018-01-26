@@ -39,9 +39,7 @@ public class ProveedorRestController {
 	@Autowired(required=true)
 	@Qualifier("proveedorRepository")
 	private ProveedorRepository proveedorRepository;
-		
 	
-	@SuppressWarnings("finally")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -54,7 +52,6 @@ public class ProveedorRestController {
 		return Response.ok(proveedores).build();
 	}
 	
-	@SuppressWarnings("finally")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -96,7 +93,6 @@ public class ProveedorRestController {
 		return Response.status(Status.OK).entity(idproveedor).build();
 	}
 	
-	@SuppressWarnings("finally")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

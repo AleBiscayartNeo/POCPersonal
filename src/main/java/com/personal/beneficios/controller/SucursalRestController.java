@@ -21,9 +21,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.personal.beneficios.dto.SucursalDTO;
-import com.personal.beneficios.entity.Localidad;
-import com.personal.beneficios.entity.Proveedor;
-import com.personal.beneficios.entity.Provincia;
 import com.personal.beneficios.entity.Sucursal;
 import com.personal.beneficios.repository.SucursalRepository;
 
@@ -40,9 +37,7 @@ public class SucursalRestController {
 	@Autowired(required=true)
 	@Qualifier("sucursalRepository")
 	private SucursalRepository sucursalRepository;
-		
 	
-	@SuppressWarnings("finally")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -55,7 +50,6 @@ public class SucursalRestController {
 		return Response.ok(sucursales).build();
 	}
 	
-	@SuppressWarnings("finally")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -68,7 +62,6 @@ public class SucursalRestController {
 		return Response.ok(sucursal).build();
 	}
 	
-	@SuppressWarnings("finally")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

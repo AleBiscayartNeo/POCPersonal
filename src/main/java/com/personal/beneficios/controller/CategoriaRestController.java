@@ -30,9 +30,7 @@ public class CategoriaRestController {
 	@Autowired(required=true)
 	@Qualifier("categoriaRepository")
 	private CategoriaRepository categoriaRepository;
-		
 	
-	@SuppressWarnings("finally")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

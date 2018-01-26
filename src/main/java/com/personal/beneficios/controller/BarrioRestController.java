@@ -34,7 +34,6 @@ public class BarrioRestController {
 	private BarrioRepository barrioRepository;
 		
 	
-	@SuppressWarnings("finally")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
