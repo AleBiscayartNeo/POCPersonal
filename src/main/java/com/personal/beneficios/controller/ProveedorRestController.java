@@ -120,7 +120,9 @@ public class ProveedorRestController {
 					sucursalDTO.setDescripcionBarrio(sucursal.getBarrio() != null ? sucursal.getBarrio() : "");
 					sucursalDTO.setCalle(sucursal.getCalle());
 					sucursalDTO.setId(sucursal.getId());
-					sucursalDTO.setInformacionAdicional(sucursal.getInformacionAdicional());
+					if (sucursal.getInformacionAdicional()!= null){
+						sucursalDTO.setInformacionAdicional(sucursal.getInformacionAdicional());
+					}
 					sucursalDTO.setLatitud(sucursal.getLatitud());
 					sucursalDTO.setDescripcionLocalidad(sucursal.getLocalidad() != null ? sucursal.getLocalidad().getDescripcion() : "");
 					sucursalDTO.setLongitud(sucursal.getLongitud());
