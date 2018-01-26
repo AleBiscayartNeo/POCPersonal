@@ -10,7 +10,7 @@ angular
     'app.sucursales'
   ])
   .constant('APP_CONFIG', {
-    'API_URL': 'http://localhost:8080/app-beneficios/services'
+    'API_URL': window.location.origin + '/app-beneficios/services'
   })
   .config(function ($locationProvider, $routeProvider, $httpProvider, $mdThemingProvider, $mdIconProvider) {
     $httpProvider.interceptors.push('RequestsErrorHandler');
@@ -46,7 +46,6 @@ angular
 
     $rootScope.$on("$locationChangeStart", function (event, next, current) {
       $rootScope.isLoggedIn = AuthService.isAuth();
-      console.log('locationChangeStart');
       if ($rootScope.isLoggedIn) {
         if ($location.url() == '/login') {
           $location.url('/');
