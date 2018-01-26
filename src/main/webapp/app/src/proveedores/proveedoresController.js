@@ -111,13 +111,13 @@ angular.module('app.proveedores')
 
       self.guardar = function () {
         if (isUpdate) {
-          ProveedoresService.editProveedor()
+          ProveedoresService.editProveedor(self.proveedor)
             .then(function (result) {
               $rootScope.showSuccess('Proveedor editado con éxito.');
               $mdDialog.hide();
             });
         } else {
-          ProveedoresService.saveProveedor()
+          ProveedoresService.saveProveedor(self.proveedor)
             .then(function (result) {
               $rootScope.showSuccess('Proveedor creado con éxito.');
               $mdDialog.hide();
