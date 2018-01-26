@@ -6,8 +6,7 @@ angular.module('app')
 
     self.menuItems = [
       { name: 'Proveedores', url: '/proveedores', icon: 'work' },
-      { name: 'Descuentos', url: '/descuentos', icon: 'loyalty' },
-      { name: 'Categorias', url: '/categorias', icon: 'assignment' },
+      { name: 'Descuentos', url: '/descuentos', icon: 'loyalty' }
     ];
 
     self.go = function (route) {

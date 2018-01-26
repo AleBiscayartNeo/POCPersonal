@@ -19,7 +19,11 @@ angular
      * Routes
      */
     $locationProvider.hashPrefix('!');
-    $routeProvider.otherwise({ redirectTo: '/home' });
+    $routeProvider.when('/login', {
+      templateUrl: 'app/src/login.html',
+      controller: 'LoginController',
+      controllerAs: 'ctrl'
+    }).otherwise({ redirectTo: '/proveedores' });
 
     /**
      * Theme Config
@@ -38,7 +42,21 @@ angular
       .accentPalette('blue-grey')
       .warnPalette('pink');
   })
-  .run(function ($rootScope, $mdSidenav, $mdToast) {
+  .run(function ($rootScope, $location, $mdSidenav, $mdToast, AuthService) {
+
+    $rootScope.$on("$locationChangeStart", function (event, next, current) {
+      $rootScope.isLoggedIn = AuthService.isAuth();
+      console.log('locationChangeStart');
+      if ($rootScope.isLoggedIn) {
+        if ($location.url() == '/login') {
+          $location.url('/');
+        }
+      } else {
+        $location.url('/login');
+      }
+    });
+
+    $rootScope.logout = AuthService.logout;
 
     $rootScope.toggleList = function () {
       $mdSidenav('left').toggle();
@@ -88,4 +106,22 @@ angular
         return $q.reject(rejection);
       }
     };
+  }])
+  .controller('LoginController', ['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
+    var self = this;
+
+    self.username = null;
+    self.password = null;
+    self.error = null;
+
+    self.login = function () {
+      $rootScope.isLoggedIn = AuthService.login(self.username, self.password);
+
+      if ($rootScope.isLoggedIn) {
+        $location.url('/');
+      } else {
+        self.error = 'Usuario o Contraseña incorrecto'
+      }
+    }
+
   }]);
