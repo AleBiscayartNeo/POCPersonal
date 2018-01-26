@@ -3,7 +3,10 @@
  */
 package com.personal.beneficios.repository;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,7 +16,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.personal.beneficios.dto.DescuentoGeolocalizadoDTO;
+import com.personal.beneficios.dto.SucursalDTO;
 import com.personal.beneficios.entity.Descuento;
+import com.personal.beneficios.entity.Sucursal;
+
 
 /**
  * The class DescuentoRepository
@@ -57,4 +64,99 @@ public class DescuentoRepository {
 		
 		entityManager.remove(descuento);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
+	public ArrayList<DescuentoGeolocalizadoDTO> getDescuentosGeolocalizados(
+			String longuitud, String latitud, Integer idNivel,
+			Integer idCategoria) {
+		Query query = null;
+		ArrayList<Descuento> descuentos = null;
+		ArrayList<DescuentoGeolocalizadoDTO> descGeoDTOs = new ArrayList<DescuentoGeolocalizadoDTO>();
+		if (idNivel != null && idCategoria != null) {
+			query = entityManager
+					.createQuery("select d from Descuento d where d.nivel.id=:idNivel and d.categoria.id=:idCategoria ");
+			query.setParameter("idCategoria", idCategoria);
+			query.setParameter("idNivel", idNivel);
+
+			descuentos = (ArrayList<Descuento>) query.getResultList();
+						
+			} else if(idNivel == null && idCategoria != null){
+				
+				query = entityManager
+						.createQuery("select d from Descuento d where d.nivel.id=:idNivel");
+				query.setParameter("idNivel", idNivel);
+
+				descuentos = (ArrayList<Descuento>) query.getResultList();
+
+			} else if(idNivel != null && idCategoria == null){
+				
+				query = entityManager
+						.createQuery("select d from Descuento d where d.categoria.id=:idCategoria ");
+				query.setParameter("idCategoria", idCategoria);
+				
+				descuentos = (ArrayList<Descuento>) query.getResultList();
+				
+			 } else if(idNivel == null && idCategoria == null){
+				 query = entityManager
+							.createQuery("select d from Descuento d ");
+				 
+				 descuentos = (ArrayList<Descuento>) query.getResultList();
+		}
+		
+		for (Descuento descuento : descuentos) {
+			DescuentoGeolocalizadoDTO descGeoDTO = new DescuentoGeolocalizadoDTO();
+			
+			descGeoDTO.setNombre(descuento.getNombre());
+			descGeoDTO.setDescripcion(descuento.getDescripcion());
+			descGeoDTO.setDescripcionCorta(descuento.getDescripcionCorta());
+			descGeoDTO.setVigenciaDesde(descuento.getVigenciaDesde());
+			descGeoDTO.setVigenciaHasta(descuento.getVigenciaHasta());
+			descGeoDTO.setImagen(descuento.getImagen());
+			descGeoDTO.setLegales(descuento.getLegales());
+			descGeoDTO.setNivel(descuento.getNivel());
+			descGeoDTO.setProveedor(descuento.getProveedor());
+			descGeoDTO.setCategoria(descuento.getCategoria());
+			
+			 query = entityManager
+						.createQuery("select  s from Sucursal s where s.proveedor.id =:id" );
+			 query.setParameter("id", descuento.getProveedor().getId());
+						 
+
+			 ArrayList<Sucursal> Sucursales = (ArrayList<Sucursal>) query.getResultList();
+			 ArrayList<SucursalDTO> SucursalesDto =  new ArrayList<SucursalDTO>();
+			 for (Sucursal sucursal : Sucursales) {
+				 SucursalDTO sucursalDTO = new SucursalDTO();
+				 query = entityManager
+							.createQuery("select (acos(sin(radians(" + latitud + ")) * sin(radians(s.latitud)) + cos(radians(" + latitud + ")) * cos(radians(s.latitud)) *"
+							+ "cos(radians(" + longuitud + ") - radians(s.longitud))) * 6378) from Sucursal s where s.id =:id" );
+				 query.setParameter("id", sucursal.getId());
+				 
+				 Double distancia = (Double) query.getSingleResult();
+				 
+				 DecimalFormat df = new DecimalFormat("#.00");
+				
+				 
+				 sucursalDTO.setDistancia(df.format(distancia));
+				 sucursalDTO.setCalle(sucursal.getCalle());
+				 sucursalDTO.setNumero(sucursal.getNumero());
+				 sucursalDTO.setInformacionAdicional(sucursal.getInformacionAdicional());
+				 sucursalDTO.setDescripcionProvincia(sucursal.getProvincia().getDescripcion());
+				 sucursalDTO.setDescripcionLocalidad(sucursal.getLocalidad().getDescripcion());
+				 sucursalDTO.setDescripcionBarrio(sucursal.getBarrio().getDescripcion());
+				 sucursalDTO.setLatitud(sucursal.getLatitud());
+				 sucursalDTO.setLongitud(sucursal.getLongitud());
+				 sucursalDTO.setTelefono(sucursal.getTelefono());
+				 SucursalesDto.add(sucursalDTO);
+				
+			}
+			
+			 descGeoDTO.setSucursales(SucursalesDto);
+			 descGeoDTOs.add(descGeoDTO);
+		}
+
+		return descGeoDTOs;
+
+	}
+
 }

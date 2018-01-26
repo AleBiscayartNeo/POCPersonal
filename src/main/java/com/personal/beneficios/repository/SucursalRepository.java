@@ -43,6 +43,14 @@ public class SucursalRepository {
 	return  (Sucursal) query.getSingleResult();
 	}	
 	
+	@Transactional(readOnly=true)
+	public ArrayList<Sucursal> getSucursalPorIdProveedor(Integer idProveedor) {
+	
+	Query query  = entityManager.createQuery("SELECT sucursal FROM Sucursal sucursal where sucursal.proveedor.id=:id");
+	query.setParameter("id", idProveedor);
+	return (ArrayList<Sucursal>) query.getResultList();
+	}
+	
 	
 	public void agregarSucursal(Sucursal sucursal){
 		entityManager.persist(sucursal);

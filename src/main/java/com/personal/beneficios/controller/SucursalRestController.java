@@ -69,6 +69,19 @@ public class SucursalRestController {
 		return Response.ok(sucursal).build();
 	}
 	
+	@SuppressWarnings("finally")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/proveedor/{idProveedor}")
+	public Response getSucursalPorIdProveedor(@PathParam(value = "idProveedor")Integer idProveedor){
+		ArrayList<Sucursal> sucursales;
+		
+		sucursales = sucursalRepository.getSucursalPorIdProveedor(idProveedor);
+		
+		return Response.ok(sucursales).build();
+	}
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

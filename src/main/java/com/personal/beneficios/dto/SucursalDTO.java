@@ -41,6 +41,8 @@ public class SucursalDTO {
 		private String longitud;
 				
 		private Integer telefono;
+		
+		private String distancia;
 
 		/**
 		 * @return the id
@@ -236,6 +238,20 @@ public class SucursalDTO {
 		 */
 		public void setDescripcionBarrio(String descripcionBarrio) {
 			this.descripcionBarrio = descripcionBarrio;
+		}
+
+		/**
+		 * @return the distancia
+		 */
+		public String getDistancia() {
+			return distancia;
+		}
+
+		/**
+		 * @param distancia the distancia to set
+		 */
+		public void setDistancia(String distancia) {
+			this.distancia = distancia;
 		}
 
 		
