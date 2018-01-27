@@ -15,6 +15,7 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
   self.progress = null;
 
   // Funciones
+  self.ver = ver;
   self.nuevo = nuevo;
   self.editar = editar;
   self.eliminar = eliminar;
@@ -28,6 +29,26 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
   }
   init();
 
+  /**
+   * 
+   * @param {Object} descuento 
+   */
+  function ver(event, descuento) {
+    $mdDialog.show({
+      locals: { descuento: descuento },
+      controller: function ($scope, descuento, $mdDialog) {
+        $scope.descuento = descuento;
+        $scope.cancel = function () {
+          $mdDialog.cancel();
+        }
+      },
+      templateUrl: 'app/src/descuentos/descuentoDetail.html',
+      parent: angular.element(document.body),
+      targetEvent: event,
+      clickOutsideToClose: true,
+      fullscreen: false
+    })
+  }
   /**
    * 
    * @param {$event} event 
