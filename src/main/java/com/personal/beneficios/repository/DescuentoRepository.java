@@ -119,6 +119,7 @@ public class DescuentoRepository {
 		for (Descuento descuento : descuentos) {
 			DescuentoGeolocalizadoDTO descGeoDTO = new DescuentoGeolocalizadoDTO();
 			
+			descGeoDTO.setId(descuento.getId());
 			descGeoDTO.setNombre(descuento.getNombre());
 			descGeoDTO.setDescripcion(descuento.getDescripcion());
 			descGeoDTO.setDescripcionCorta(descuento.getDescripcionCorta());
