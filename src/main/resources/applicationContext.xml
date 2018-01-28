@@ -23,6 +23,9 @@
 					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" id="detalleCache" />
 				<bean
 					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" id="cercanoCache" />	
+				<bean
+					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" id="sucursalProveedorCache" />	
+					
 			</set>
 		</property>
 	</bean>

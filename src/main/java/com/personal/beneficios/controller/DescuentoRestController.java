@@ -66,7 +66,7 @@ public class DescuentoRestController {
 		return Response.ok(descuento).build();
 	}
 	
-	@Caching(evict = {@CacheEvict(value="catalogoCache", allEntries=true), @CacheEvict (value="detalleCache", allEntries=true), @CacheEvict (value="cercanoCache", allEntries=true)})
+	@Caching(evict = {@CacheEvict(value="catalogoCache", allEntries=true), @CacheEvict (value="detalleCache", allEntries=true), @CacheEvict (value="cercanoCache", allEntries=true), @CacheEvict(value="sucursalProveedorCache", allEntries=true)})
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -77,7 +77,7 @@ public class DescuentoRestController {
 		
 	}
 	
-	@Caching(evict = {@CacheEvict(value="catalogoCache", allEntries=true), @CacheEvict (value="detalleCache", allEntries=true), @CacheEvict (value="cercanoCache", allEntries=true)})
+	@Caching(evict = {@CacheEvict(value="catalogoCache", allEntries=true), @CacheEvict (value="detalleCache", allEntries=true), @CacheEvict (value="cercanoCache", allEntries=true), @CacheEvict(value="sucursalProveedorCache", allEntries=true)})
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -87,7 +87,7 @@ public class DescuentoRestController {
 		return Response.status(Status.OK).entity(descuento).build();
 	}
 	
-	@Caching(evict = {@CacheEvict(value="catalogoCache", allEntries=true), @CacheEvict (value="detalleCache", allEntries=true), @CacheEvict (value="cercanoCache", allEntries=true)})
+	@Caching(evict = {@CacheEvict(value="catalogoCache", allEntries=true), @CacheEvict (value="detalleCache", allEntries=true), @CacheEvict (value="cercanoCache", allEntries=true), @CacheEvict(value="sucursalProveedorCache", allEntries=true)})
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
