@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import com.personal.beneficios.dto.ProveedorDTO;
@@ -93,6 +94,7 @@ public class ProveedorRestController {
 		return Response.status(Status.OK).entity(idproveedor).build();
 	}
 	
+	@Cacheable("sucursalProveedorCache")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
