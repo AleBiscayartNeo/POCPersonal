@@ -35,6 +35,9 @@
           <td md-cell>{{ descuento.proveedor.razonSocial }}</td>
           <td md-cell>{{ descuento.categoria.descripcion }}</td>
           <td md-cell layout="row" layout-align="end center">
+            <md-button ng-click="ctrl.ver($event, descuento)" class="md-fab md-mini" aria-label="Ver descuento">
+              <i class="material-icons">visibility</i>
+            </md-button>
             <md-button ng-click="ctrl.editar($event, descuento)" class="md-fab md-mini" aria-label="Editar Descuento">
               <i class="material-icons">create</i>
             </md-button>

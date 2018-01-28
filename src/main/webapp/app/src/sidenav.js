@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('app')
-  .controller('SidenavCtrl', ['$location', function ($location) {
+  .controller('SidenavCtrl', ['$location', 'AuthService', function ($location, AuthService) {
     var self = this;
 
     self.menuItems = [
-      { name: 'Proveedores', url: '/proveedores', icon: 'work' },
-      { name: 'Descuentos', url: '/descuentos', icon: 'loyalty' }
+      { name: 'Proveedores', url: '/proveedores', icon: 'work', private: true },
+      { name: 'Descuentos', url: '/descuentos', icon: 'loyalty', private: false }
     ];
 
     self.go = function (route) {
@@ -15,6 +15,10 @@ angular.module('app')
 
     self.isSelected = function (route) {
       return route == $location.url();
+    }
+
+    self.canUse = function (item) {
+      return item.private ? AuthService.guard() : true;
     }
 
   }]);

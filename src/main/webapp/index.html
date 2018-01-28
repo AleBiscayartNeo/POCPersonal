@@ -65,7 +65,7 @@
 
     <md-sidenav ng-if="isLoggedIn" ng-click="toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" md-whiteframe="3">
       <md-list>
-        <md-list-item ng-repeat="item in ctrl.menuItems">
+        <md-list-item ng-repeat="item in ctrl.menuItems" ng-if="ctrl.canUse(item)">
           <md-button ng-click="ctrl.go(item.url)" ng-class="{'selected' : ctrl.isSelected(item.url) }">
             <i class="material-icons">{{ item.icon }}</i>
             {{ item.name }}

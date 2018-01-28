@@ -48,7 +48,18 @@ function SucursalesCtrl($routeParams, ProveedoresService, SucursalesService, $md
    * @param {Object} sucursal 
    */
   function editar(event, sucursal) {
-    showSucursalForm(event, sucursal);
+    CommonServices.getLocalidades(sucursal.provincia.id)
+      .then(function (localidades) {
+        // Si la localidad es Capital Federal busco los barrios
+        if (localidades[0].descripcion == 'Capital Federal') {
+          CommonServices.getBarrios(localidades[0].id)
+            .then(function (barrios) {
+              showSucursalForm(event, sucursal, localidades, barrios);
+            });
+        } else {
+          showSucursalForm(event, sucursal, localidades);
+        }
+      });
   }
 
   /**
@@ -79,12 +90,14 @@ function SucursalesCtrl($routeParams, ProveedoresService, SucursalesService, $md
      * @param {$event} event 
      * @param {Object} proveedor 
      */
-  function showSucursalForm(event, sucursal) {
+  function showSucursalForm(event, sucursal, localidades, barrios) {
     $mdDialog.show({
       locals: {
         proveedorId: idProveedor,
         sucursal: sucursal,
-        provincias: selectProvincias
+        provincias: selectProvincias,
+        localidades: localidades,
+        barrios: barrios
       },
       controller: 'SucursalFormCtrl as ctrl',
       templateUrl: 'app/src/sucursales/sucursalForm.html',
@@ -112,16 +125,16 @@ function SucursalesCtrl($routeParams, ProveedoresService, SucursalesService, $md
  * SucursalFormCtrl
  */
 angular.module('app.sucursales').controller('SucursalFormCtrl', SucursalFormCtrl);
-SucursalFormCtrl.$inject = ['SucursalesService', 'CommonServices', '$mdDialog', 'proveedorId', 'sucursal', 'provincias', '$rootScope'];
-function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedorId, sucursal, provincias, $rootScope) {
+SucursalFormCtrl.$inject = ['SucursalesService', 'CommonServices', '$mdDialog', 'proveedorId', 'sucursal', 'provincias', 'localidades', 'barrios', '$rootScope'];
+function SucursalFormCtrl(SucursalesService, CommonServices, $mdDialog, proveedorId, sucursal, provincias, localidades, barrios, $rootScope) {
   var self = this;
   var isUpdate = angular.isDefined(sucursal);
 
   // Variables
   self.titulo = isUpdate ? "Editar Sucursal" : "Nueva Sucursal";
   self.provincias = provincias || [];
-  self.localidades = [];
-  self.barrios = [];
+  self.localidades = localidades || [];
+  self.barrios = barrios || [];
   self.cargandoLocalidades = false;
   self.cargandoBarrios = false;
 
