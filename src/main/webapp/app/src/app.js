@@ -23,7 +23,7 @@ angular
       templateUrl: 'app/src/login.html',
       controller: 'LoginController',
       controllerAs: 'ctrl'
-    }).otherwise({ redirectTo: '/proveedores' });
+    }).otherwise({ redirectTo: '/descuentos' });
 
     /**
      * Theme Config

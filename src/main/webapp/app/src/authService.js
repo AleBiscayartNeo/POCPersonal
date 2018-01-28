@@ -5,14 +5,15 @@ AuthService.$inject = ['$http', '$location'];
 function AuthService($http, $location) {
 
   var users = [
-    { username: 'user', password: 'user' },
-    { username: 'admin', password: 'admin' }
+    { username: 'user', password: 'user', rol: 'user' },
+    { username: 'admin', password: 'admin', rol: 'admin' }
   ];
 
   return {
     login: login,
     logout: logout,
-    isAuth: isAuth
+    isAuth: isAuth,
+    guard: guard
   }
 
   /**
@@ -47,4 +48,11 @@ function AuthService($http, $location) {
     return JSON.parse(sessionStorage.getItem('auth')) != null;
   }
 
+  /**
+   * 
+   */
+  function guard() {
+    var user = JSON.parse(sessionStorage.getItem('auth'));
+    return user.rol == 'admin';
+  }
 }
