@@ -5,8 +5,9 @@ angular.module('app')
     var self = this;
 
     self.menuItems = [
-      { name: 'Proveedores', url: '/proveedores', icon: 'work', private: true },
-      { name: 'Descuentos', url: '/descuentos', icon: 'loyalty', private: false }
+      { name: 'Oficinas', url: '/proveedores', icon: 'work', private: true },
+      { name: 'Beneficios', url: '/descuentos', icon: 'loyalty', private: false },
+      { name: 'Notificaciones', url: '/descuento', icon: 'loyalty', private: false }
     ];
 
     self.go = function (route) {

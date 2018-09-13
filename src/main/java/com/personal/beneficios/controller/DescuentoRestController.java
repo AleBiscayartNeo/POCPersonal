@@ -21,7 +21,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.personal.beneficios.dto.DescuentoDTO;
 import com.personal.beneficios.dto.DescuentoGeolocalizadoDTO;
@@ -32,8 +33,8 @@ import com.personal.beneficios.repository.DescuentoRepository;
  * The class DescuentoRestController.
  *
  */
-@Component
-@Path("/descuento")
+@RestController
+@RequestMapping("/descuento/")
 public class DescuentoRestController {
 
 	@Autowired(required=true)
@@ -44,7 +45,7 @@ public class DescuentoRestController {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/all")
+	@RequestMapping("all")
 	public Response getDescuentos(){
 		ArrayList<Descuento> descuentos = null;
 		

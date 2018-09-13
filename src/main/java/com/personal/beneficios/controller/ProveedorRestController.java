@@ -21,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.personal.beneficios.dto.ProveedorDTO;
 import com.personal.beneficios.dto.SucursalDTO;
@@ -33,8 +35,8 @@ import com.personal.beneficios.repository.ProveedorRepository;
  * The class DescuentoRestController.
  *
  */
-@Component
-@Path("/proveedor")
+@RestController
+@RequestMapping("/proveedor/")
 public class ProveedorRestController {
 
 	@Autowired(required=true)
@@ -44,7 +46,7 @@ public class ProveedorRestController {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/all")
+	@Path("all")
 	public Response getProveedores(){
 		ArrayList<Proveedor> proveedores = null;
 		

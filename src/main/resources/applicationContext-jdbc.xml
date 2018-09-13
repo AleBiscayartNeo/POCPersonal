@@ -16,6 +16,7 @@
 	
 	<context:component-scan base-package="com.personal.beneficios.controller" />
 	<context:component-scan base-package="com.personal.beneficios.repository" />
+	<context:component-scan base-package="org.neoris.beneficios" />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<!-- Modificar segun configuracion de la DB -->
