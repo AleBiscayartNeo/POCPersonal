@@ -42,10 +42,10 @@ public class Auth0Filter implements Filter {
 
 				if (isValid) {
 
-					res.sendRedirect("/app-beneficios/home");
+					res.sendRedirect("/app-beneficios/#!/descuentos");
 					return;
 				} else {
-					res.sendRedirect("/app-beneficios/login");
+					res.sendRedirect("/app-beneficios/#!/login");
 					return;
 				}
 			}

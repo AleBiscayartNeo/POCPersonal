@@ -120,7 +120,7 @@ public class CallbackController {
         	tokens = exchangeCodeForTokens(authorizationCode,redirectUri);
      	        	      	
         	SessionUtils.set(req, "accessToken", tokens.getAccessToken());
-        	res.sendRedirect("/app-beneficios/home");
+        	res.sendRedirect("/app-beneficios/#!/descuentos");
         	
         } catch (Exception e) {
             e.printStackTrace();
