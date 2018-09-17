@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping("/services")
 public class NotificacionRestController {
 	
 	private static final String FIREBASE_SERVER_KEY = "AAAAKjXKv5o:APA91bHAnqzcNj0GjJ_kv0IAJ4GXI9efLjuoHErb0IAckhhR92lHnZQmNfZVtFJfVE-zJzM5SUJDcxk5vNcGBRCSjVggoTDkpa0P-V5vMYnZFmzb_wDuIomNHv0ON6cavI-vd6QRJhsr";

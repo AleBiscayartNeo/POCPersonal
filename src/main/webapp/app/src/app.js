@@ -7,10 +7,11 @@ angular
     'ngFileUpload',
     'app.descuentos',
     'app.proveedores',
-    'app.sucursales'
+    'app.sucursales',
+    'app.notificaciones'
   ])
   .constant('APP_CONFIG', {
-    'API_URL': window.location.origin + '/app-beneficios/services'
+    'API_URL': window.location.origin + '/app-beneficios/bo'
   })
   .config(function ($locationProvider, $routeProvider, $httpProvider, $mdThemingProvider, $mdIconProvider) {
     $httpProvider.interceptors.push('RequestsErrorHandler');
