@@ -19,8 +19,8 @@ angular
      * Routes
      */
     $locationProvider.hashPrefix('!');
-    $routeProvider.when('/login', {
-      templateUrl: 'app/src/login.html',
+    $routeProvider.when('/inicio', {
+      templateUrl: 'app/src/inicio.html',
       controller: 'LoginController',
       controllerAs: 'ctrl'
     }).otherwise({ redirectTo: '/descuentos' });
@@ -47,11 +47,11 @@ angular
     $rootScope.$on("$locationChangeStart", function (event, next, current) {
       $rootScope.isLoggedIn = AuthService.isAuth();
       if ($rootScope.isLoggedIn) {
-        if ($location.url() == '/login') {
+        if ($location.url() == '/i') {
           $location.url('/');
         }
       } else {
-        $location.url('/login');
+        $location.url('/inicio');
       }
     });
 

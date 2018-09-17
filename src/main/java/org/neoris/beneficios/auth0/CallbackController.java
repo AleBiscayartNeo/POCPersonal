@@ -92,7 +92,7 @@ public class CallbackController {
 	private TokenUtils utils;
 
 	public CallbackController(AppConfig config) {
-		this.redirectOnFail = "/app-beneficios/login";
+		this.redirectOnFail = "/app-beneficios/#!/login";
 		this.redirectOnSuccess = "/app-beneficios/home";
 		this.mapper = new ObjectMapper();
 		this.tType = new TypeReference<TokenHolder>() {

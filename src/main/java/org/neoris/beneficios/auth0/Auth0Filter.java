@@ -47,7 +47,7 @@ public class Auth0Filter implements Filter {
 				} else {
 					SessionUtils.remove(req, "accessToken");
 					SessionUtils.remove(req, "idToken");
-					res.sendRedirect("/app-beneficios/#!/login");
+					res.sendRedirect("/app-beneficios/#!/inicio");
 					return;
 				}
 			}
