@@ -45,6 +45,8 @@ public class Auth0Filter implements Filter {
 					res.sendRedirect("/app-beneficios/#!/descuentos");
 					return;
 				} else {
+					SessionUtils.remove(req, "accessToken");
+					SessionUtils.remove(req, "idToken");
 					res.sendRedirect("/app-beneficios/#!/login");
 					return;
 				}
@@ -53,20 +55,17 @@ public class Auth0Filter implements Filter {
 			if (path.equals("/app-beneficios/home")) {
 
 				if (!isValid) {
-
+					SessionUtils.remove(req, "accessToken");
+					SessionUtils.remove(req, "idToken");
 					res.sendRedirect("/app-beneficios/error");
 					return;
 				}
 
 			}
 		} else if (path.contains("resources") || path.contains("error") || path.contains("login")
-				|| path.contains("callback") || path.contains("services")) {
+				|| path.contains("callback")) {
 			// Do nothing
-		} else if (path.contains("/app-beneficios/") && !path.equals("/app-beneficios/")) {
-			res.sendRedirect("/app-beneficios/");
-			return;
-		}
-
+		} 
 		next.doFilter(request, response);
 	}
 

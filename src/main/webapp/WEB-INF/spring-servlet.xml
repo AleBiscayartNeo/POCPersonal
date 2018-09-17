@@ -40,7 +40,7 @@
 			value="file:///${neoBeneficios}/Conexiones/NeoBeneficios.properties" />
 	</bean>
 
-	<bean id="Auth0Filter" class="org.neoris.beneficios.auth0.Auth0Filter"/>
+	<bean id="WebFilter" class="org.neoris.beneficios.auth0.Auth0Filter"/>
 	<bean id="Auth0ServicesFilter" class="org.neoris.beneficios.auth0.Auth0ServicesFilter"/>
 
 	<bean id="dataSource"

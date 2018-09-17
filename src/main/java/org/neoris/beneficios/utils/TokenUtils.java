@@ -24,163 +24,143 @@ import com.auth0.json.auth.UserInfo;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
+/**
+ * Util para manejo de tokens
+ * 
+ */
 @Component
 public class TokenUtils {
-	
-    @Autowired(required=true)
+
+	@Autowired(required = true)
 	@Qualifier("userService")
-    private UserService userService;
-	
-    
-    private final ObjectMapper mapper;
-    private AppConfig config;
-    private final TypeReference<UserInfo> tTType;
-    
+	private UserService userService;
 
-    public TokenUtils(AppConfig config) {
-        this.mapper = new ObjectMapper();		
-		  this.tTType = new TypeReference<UserInfo>() {
-			};
+	private final ObjectMapper mapper;
+	private AppConfig config;
+	private final TypeReference<UserInfo> tTType;
+
+	public TokenUtils(AppConfig config) {
+		this.mapper = new ObjectMapper();
+		this.tTType = new TypeReference<UserInfo>() {
+		};
 		this.config = config;
-		
-    }
-	
-    public UserInfo validateToken(String token) {
-    	String url = "https://portal.neoris.net/f5-oauth2/v1/introspect";
 
-    	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);    	
-    	
-    	nameValuePairs.add(new BasicNameValuePair("token_type_hint", "Bearer"));
+	}
 
-    	nameValuePairs.add(new BasicNameValuePair("client_id",config.getClientId()));
-    	nameValuePairs.add(new BasicNameValuePair("client_secret", config.getClientSecret()));
-    	nameValuePairs.add(new BasicNameValuePair("token", token));
+	public UserInfo validateToken(String token) {
+		String url = "https://portal.neoris.net/f5-oauth2/v1/introspect";
 
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
 
-    	String postResult = null;
-    	try {
-			postResult =  sendPost(url, nameValuePairs);
+		nameValuePairs.add(new BasicNameValuePair("token_type_hint", "Bearer"));
+
+		nameValuePairs.add(new BasicNameValuePair("client_id", config.getClientId()));
+		nameValuePairs.add(new BasicNameValuePair("client_secret", config.getClientSecret()));
+		nameValuePairs.add(new BasicNameValuePair("token", token));
+
+		String postResult = null;
+		try {
+			postResult = sendPost(url, nameValuePairs);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	 return parseValidate(postResult);
-    }
-    
-    
-    public boolean validarUser(String userName) {
-		
+		return parseValidate(postResult);
+	}
+
+	public boolean validarUser(String userName) {
+
 		return userService.isUserAdminWeb(userName);
 	}
-    
+
 	public Boolean infoUservalidateWeb(UserInfo holder) throws Auth0Exception {
-		
-		String user = null;		
-		Boolean active = false;
-		Boolean isValid = false;
-		
-		Map<String, Object> userInfoValues = holder.getValues();
-
-		if (null != userInfoValues ) {
-			
-			active = (Boolean) userInfoValues.get("active");
-			
-			if(null !=userInfoValues.get("username")) {
-				user = splitUserName(userInfoValues.get("username").toString());
-			}				
-			
-		}
-		
-		if(active && validarUser(user)) {
-			isValid = true;
-		}
-		
-		return isValid;
-	}
-	
-	public Boolean infoUservalidate(UserInfo holder) throws Auth0Exception {
-			
-		Boolean active = false;
-		
-		Map<String, Object> userInfoValues = holder.getValues();
-
-		if (null != userInfoValues ) {
-			
-			active = (Boolean) userInfoValues.get("active");
-			
-		}
-
-		return active;
-	}
-	
-	
-	private String splitUserName(String userName) {
 
 		String user = null;
+		Boolean active = false;
+		Boolean isValid = false;
 
-		if (null != userName) {
-			String[] parts = userName.split("/");
+		Map<String, Object> userInfoValues = holder.getValues();
 
-			if (null != parts && null != parts[2]) {
+		if (null != userInfoValues) {
 
-				int inicio = parts[2].indexOf(".");
+			active = (Boolean) userInfoValues.get("active");
 
-				user = parts[2].substring(inicio + 1);
-
+			if (null != userInfoValues.get("username")) {
+				user = splitUserName(userInfoValues.get("username").toString());
 			}
 
 		}
 
-		return user;
+		if (active && validarUser(user)) {
+			isValid = true;
+		}
 
+		return isValid;
 	}
-	
-    public String sendPost(String url, List<NameValuePair> postParams) 
-            throws Exception {
 
-        HttpPost post = new HttpPost(url);
-        HttpClient client = new DefaultHttpClient();
+	public Boolean infoUservalidate(UserInfo holder) throws Auth0Exception {
 
-        // add header
-        post.setHeader("Origin", "J6W4EFQ6cw6JMYszkxhneS6HZhAYuGVWVeNn6ch4KnWwE");
-        post.setHeader("Accept", 
-                "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        post.setHeader("Accept-Language", "en-US,en;q=0.5");
-        post.setHeader("Connection", "keep-alive");
-        //post.setHeader("Referer", "https://portal.neoris.net/f5-oauth2/v1/token");
-        post.setHeader("Content-Type", "application/x-www-form-urlencoded");
+		Boolean active = false;
+		Map<String, Object> userInfoValues = holder.getValues();
 
-        post.setEntity(new UrlEncodedFormEntity(postParams));
+		if (null != userInfoValues) {
+			active = (Boolean) userInfoValues.get("active");
+		}
 
-        HttpResponse response = client.execute(post);
+		return active;
+	}
 
-        int responseCode = response.getStatusLine().getStatusCode();
+	private String splitUserName(String userName) {
+		String user = null;
+		if (null != userName) {
+			String[] parts = userName.split("/");
+			if (null != parts && null != parts[2]) {
+				int inicio = parts[2].indexOf(".");
+				user = parts[2].substring(inicio + 1);
+			}
+		}
+		return user;
+	}
 
-        BufferedReader rd = new BufferedReader(
-                new InputStreamReader(response.getEntity().getContent()));
+	public String sendPost(String url, List<NameValuePair> postParams) throws Exception {
 
-        StringBuffer result = new StringBuffer();
-        String line = "";
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
-        }
-        return result.toString();
-    }
-    
+		HttpPost post = new HttpPost(url);
+		HttpClient client = new DefaultHttpClient();
 
-    private UserInfo parseValidate(String response) {
-    	UserInfo tokenHolder = null;
-        try {
-           
-        	tokenHolder = mapper.readValue(response, tTType);
-        } catch (IOException e) {
-            //throw new APIException("Failed to parse json body", response, e);
-        }
-        
-        return tokenHolder;
-    }
-    
-    
+		// add header
+		post.setHeader("Origin", "J6W4EFQ6cw6JMYszkxhneS6HZhAYuGVWVeNn6ch4KnWwE");
+		post.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+		post.setHeader("Accept-Language", "en-US,en;q=0.5");
+		post.setHeader("Connection", "keep-alive");
+		// post.setHeader("Referer", "https://portal.neoris.net/f5-oauth2/v1/token");
+		post.setHeader("Content-Type", "application/x-www-form-urlencoded");
+
+		post.setEntity(new UrlEncodedFormEntity(postParams));
+
+		HttpResponse response = client.execute(post);
+
+		int responseCode = response.getStatusLine().getStatusCode();
+
+		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+
+		StringBuffer result = new StringBuffer();
+		String line = "";
+		while ((line = rd.readLine()) != null) {
+			result.append(line);
+		}
+		return result.toString();
+	}
+
+	private UserInfo parseValidate(String response) {
+		UserInfo tokenHolder = null;
+		try {
+
+			tokenHolder = mapper.readValue(response, tTType);
+		} catch (IOException e) {
+			// throw new APIException("Failed to parse json body", response, e);
+		}
+
+		return tokenHolder;
+	}
 
 }
