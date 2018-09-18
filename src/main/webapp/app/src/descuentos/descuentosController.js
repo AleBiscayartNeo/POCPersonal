@@ -11,6 +11,7 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
 
   // Variables
   self.descuentos = null;
+  self.obj = null;
   self.query = { order: 'nombre', limit: 5, page: 1 };
   self.progress = null;
 
@@ -24,7 +25,7 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
   function init() {
     self.progress = DescuentosService.getDescuentos()
       .then(function (result) {
-        self.descuentos = result;
+        self.descuentos = result.data;
       });
   }
   init();

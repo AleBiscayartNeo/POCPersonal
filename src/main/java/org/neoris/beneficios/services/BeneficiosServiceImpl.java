@@ -29,8 +29,12 @@ public class BeneficiosServiceImpl implements BeneficiosService {
 	@Autowired(required = true)
 	private CategoriaDAO categoriaDAO;
 
-	public ArrayList<Beneficio> getBeneficios(Integer categoriaId) {
-		return beneficioDAO.getBeneficios(categoriaId);
+	public ArrayList<Beneficio> getBeneficios() {
+		return beneficioDAO.getBeneficios();
+	}
+	
+	public ArrayList<Beneficio> getBeneficiosCategoria(Integer categoriaId) {
+		return beneficioDAO.getBeneficiosCategoria(categoriaId);
 	}
 
 	public ArrayList<Beneficio> getBeneficiosOficina(Integer categoriaId,

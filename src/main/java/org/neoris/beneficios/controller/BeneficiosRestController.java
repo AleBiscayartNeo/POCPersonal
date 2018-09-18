@@ -91,6 +91,33 @@ public class BeneficiosRestController {
 			return serviceResponse;
 		}
 	}
+	
+	@SuppressWarnings("finally")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping("all")
+	public ServiceResponse getBeneficiosAll() {
+
+		ServiceResponse serviceResponse = new ServiceResponse();
+
+		
+		try {
+			ArrayList<Beneficio> beneficios = beneficiosService
+					.getBeneficios();
+			serviceResponse.setData(beneficios);
+ 			serviceResponse.setCode("0");
+
+		} catch (Exception e) {
+			serviceResponse.setCode("1");
+			serviceResponse
+					.setMessage("Ha ocurrido un error al consultar los datos, intente más tarde.");
+		} finally {
+			return serviceResponse;
+		}
+	
+	}
+
 
 	
 }

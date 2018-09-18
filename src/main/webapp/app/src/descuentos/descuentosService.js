@@ -17,7 +17,7 @@ function DescuentosService($http, APP_CONFIG) {
   function getDescuentos() {
     return $http({
       method: 'GET',
-      url: APP_CONFIG.API_URL + '/descuento/all'
+      url: APP_CONFIG.API_URL + '/beneficios/all'
     }).then(function (response) {
       return response.data;
     }, function (response) {

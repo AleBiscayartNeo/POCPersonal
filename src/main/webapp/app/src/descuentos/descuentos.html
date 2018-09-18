@@ -13,11 +13,9 @@
       <thead md-head md-order="ctrl.query.order">
         <tr md-row>
           <th md-column md-order-by="nombre">Nombre</th>
-          <th md-column>Descripción corta</th>
-          <th md-column md-order-by="nivel.descripcion">Niveles</th>
-          <th md-column md-order-by="vigenciaDesde">Vigencia</th>
-          <!-- <th md-column md-order-by="vigenciaHasta">Vigencia Hasta</th> -->
-          <th md-column md-order-by="proveedor.razonSocial">Proveedor</th>
+          <th md-column>Titulo Push</th>
+          <th md-column md-order-by="senDesde">Seniority Desde</th>
+          <th md-column md-order-by="senHasta">Seniority Hasta</th>
           <th md-column md-order-by="categoria.descripcion">Categoria</th>
           <th></th>
         </tr>
@@ -25,15 +23,10 @@
       <tbody md-body>
         <tr md-row ng-repeat="descuento in ctrl.descuentos | orderBy:ctrl.query.order | limitTo: ctrl.query.limit: (ctrl.query.page - 1) * ctrl.query.limit">
           <td md-cell>{{ descuento.nombre }}</td>
-          <td md-cell>{{ descuento.descripcionCorta }}</td>
-          <td md-cell>{{ descuento.nivel.descripcion }}</td>
-          <td md-cell>
-            {{ descuento.vigenciaDesde | date : 'dd/MM/yyyy' }}
-            <br> {{ descuento.vigenciaHasta | date : 'dd/MM/yyyy' }}
-          </td>
-          <!-- <td md-cell>{{ descuento.vigenciaHasta | date : 'dd/MM/yyyy' }}</td> -->
-          <td md-cell>{{ descuento.proveedor.razonSocial }}</td>
-          <td md-cell>{{ descuento.categoria.descripcion }}</td>
+          <td md-cell>{{ descuento.tituloPush}}</td>
+          <td md-cell>{{ descuento.senDesde }}</td>
+          <td md-cell>{{ descuento.senHasta}}</td>
+          <td md-cell>{{ descuento.idCategoria }}</td>
           <td md-cell layout="row" layout-align="end center">
             <md-button ng-click="ctrl.ver($event, descuento)" class="md-fab md-mini" aria-label="Ver descuento">
               <i class="material-icons">visibility</i>

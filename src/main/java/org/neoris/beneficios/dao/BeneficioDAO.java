@@ -8,7 +8,8 @@ import org.neoris.beneficios.entity.Beneficio;
 public interface BeneficioDAO {
 	
 	public Beneficio getBeneficio(Integer beneficioId);
-	public ArrayList<Beneficio> getBeneficios(Integer categoriaId);
+	public ArrayList<Beneficio> getBeneficios();
+	public ArrayList<Beneficio> getBeneficiosCategoria(Integer categoriaId);
 	public long getCantidadPorCategoria(Integer categoriaId);
 
 }

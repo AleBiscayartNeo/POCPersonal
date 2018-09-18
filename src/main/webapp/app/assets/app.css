@@ -191,6 +191,11 @@ table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+
 	margin-bottom: 20px;
 }
 
+.md-button.md-default-theme.md-fab, .md-button.md-fab {
+    background-color: #F3F2F2;
+    color: #1B242A;
+}
+
 .neorisFondo{
 	background-image: url("./img/Pattern_full_dark.png");
 	background-repeat: no-repeat;

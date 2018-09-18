@@ -8,7 +8,9 @@ import org.neoris.beneficios.entity.BeneficioOficina;
 
 public interface BeneficiosService {
 
-	public ArrayList<Beneficio> getBeneficios(Integer categoriaId);
+	public ArrayList<Beneficio> getBeneficios();
+	
+	public ArrayList<Beneficio> getBeneficiosCategoria(Integer categoriaId);
 	
 	public ArrayList<Beneficio> getBeneficiosOficina(Integer categoriaId, Integer oficinaId);
 	

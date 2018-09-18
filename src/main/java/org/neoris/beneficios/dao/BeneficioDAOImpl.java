@@ -24,9 +24,14 @@ public class BeneficioDAOImpl implements BeneficioDAO {
 		 query.setParameter("beneficioId", beneficioId);
 		 return (Beneficio)query.getSingleResult();
 	}
+	@Transactional(readOnly=true)
+	public ArrayList<Beneficio> getBeneficios() {
+		Query query  = entityManager.createQuery("select beneficio from Beneficio beneficio");		
+		 return (ArrayList<Beneficio>) query.getResultList();
+	}
 	
 	@Transactional(readOnly=true)
-	public ArrayList<Beneficio> getBeneficios(Integer categoriaId) {
+	public ArrayList<Beneficio> getBeneficiosCategoria(Integer categoriaId) {
 		Query query  = entityManager.createQuery("select beneficio from Beneficio beneficio where beneficio.categoria.idCategoria=:categoriaId");
 		 query.setParameter("categoriaId", categoriaId);
 		 return (ArrayList<Beneficio>) query.getResultList();
