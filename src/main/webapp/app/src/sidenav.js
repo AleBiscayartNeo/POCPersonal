@@ -5,7 +5,7 @@ angular.module('app')
     var self = this;
 
     self.menuItems = [
-      { name: 'Oficinas', url: '/proveedores', icon: 'work', private: true },
+      { name: 'Oficinas', url: '/proveedores', icon: 'work', private: false },
       { name: 'Beneficios', url: '/descuentos', icon: 'loyalty', private: false },
       { name: 'Notificaciones', url: '/notificaciones', icon: 'add_alert', private: false }
     ];
@@ -19,7 +19,7 @@ angular.module('app')
     }
 
     self.canUse = function (item) {
-      return item.private ? AuthService.guard() : true;
+      return !item.private;
     }
 
   }]);

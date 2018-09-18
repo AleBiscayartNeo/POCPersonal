@@ -32,7 +32,10 @@ public class Auth0Filter implements Filter {
 
 		String path = ((HttpServletRequest) request).getRequestURI();
 
-		if (null != accessToken && path.contains("/app-beneficios/")) {
+		if (path.contains("resources") || path.contains("error") || path.contains("login")
+				|| path.contains("callback") || path.contains("logout")) {
+			// Do nothing
+		} else if (null != accessToken && path.contains("/app-beneficios/")) {
 
 			UserInfo userInfo = utils.validateToken(accessToken);
 
@@ -62,10 +65,8 @@ public class Auth0Filter implements Filter {
 				}
 
 			}
-		} else if (path.contains("resources") || path.contains("error") || path.contains("login")
-				|| path.contains("callback")) {
-			// Do nothing
-		} 
+		}
+		
 		next.doFilter(request, response);
 	}
 

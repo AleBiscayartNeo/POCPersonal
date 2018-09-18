@@ -92,7 +92,7 @@ public class CallbackController {
 	private TokenUtils utils;
 
 	public CallbackController(AppConfig config) {
-		this.redirectOnFail = "/app-beneficios/#!/login";
+		this.redirectOnFail = "/app-beneficios/#!/inicio";
 		this.redirectOnSuccess = "/app-beneficios/home";
 		this.mapper = new ObjectMapper();
 		this.tType = new TypeReference<TokenHolder>() {
@@ -127,7 +127,7 @@ public class CallbackController {
 			Boolean isValid = false;
 			Tokens tokens = null;
 			String userName = null;
-			String redirectUri = req.getRequestURL().toString();
+			String redirectUri = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/app-beneficios/callback";//req.getRequestURL().toString();
 			String authorizationCode = req.getParameter(KEY_CODE);
 
 			tokens = exchangeCodeForTokens(authorizationCode, redirectUri);
