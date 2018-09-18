@@ -174,20 +174,21 @@ table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+
 }
 
 .md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
-	background-color: #F3F2F2 !important;
+	background-color: #1B242A !important;
+	color: #F3F2F2 !important;
 }
 
 .neorisBlue{
 	background-color: #89D2E6 !important;
 	float: right;
-	color: #1B242A !important;
+	color: #F3F2F2 !important;
 	margin-bottom: 20px;
 }
 
 .neorisPink{
 	background-color: #F294CD !important;
 	float: right;
-	color: #1B242A !important;
+	color: #F3F2F2 !important;
 	margin-bottom: 20px;
 }
 
@@ -208,3 +209,4 @@ table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+
 md-input-container.md-default-theme .md-input, md-input-container .md-input {
     border-color: #1B242A;
 }
+

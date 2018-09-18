@@ -9,7 +9,7 @@
 
 </script> 
 <head>	
-  <title>Club Personal | Beneficios</title>
+  <title>Neo Beneficios</title>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +47,7 @@
         <i class="material-icons">menu</i>
       </md-button>
 
-      <img src="./app/assets/img/logo-club-personal-grey.png" alt="">
+      <img src="./app/assets/img/NEORIS_logo_light.png" alt="" style="width: 10%;">
 
       <div flex></div>
 

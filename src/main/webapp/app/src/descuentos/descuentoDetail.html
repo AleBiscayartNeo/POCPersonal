@@ -18,35 +18,30 @@
     </md-card-title-media>
     <div class="md-dialog-content">
       <div class="md-headline" flex>{{ descuento.nombre }}</div>
-      <div class="md-subhead" flex>{{ descuento.descripcionCorta }}</div>
-
-      <p style="font-size: 12px; text-align: center;">
-        Valido desde {{ descuento.vigenciaDesde | date : 'dd/MM/yyyy' }} hasta {{ descuento.vigenciaHasta | date : 'dd/MM/yyyy' }}
-      </p>
 
       <p>
-        <div class="md-body-2">Descripcion del descuento</div>
-        {{ descuento.descripcion }}
+        <span class="md-body-2">Descripcion del beneficio</span>
+        {{ descuento.decripcion }}
       </p>
-
+      
       <p>
-        <span class="md-body-2">Proveedor: </span>
-        {{ descuento.proveedor.razonSocial }}
-      </p>
-
-      <p>
-        <span class="md-body-2">Nivel: </span>
-        {{ descuento.nivel.descripcion }}
+        <span class="md-body-2">Titulo Push: </span>
+        {{ descuento.tituloPush }}
       </p>
 
       <p>
         <span class="md-body-2">Categoría: </span>
-        {{ descuento.categoria.descripcion }}
+        {{ descuento.idCategoria }}
       </p>
 
       <p>
-        <div class="md-body-2">Legales</div>
-        {{ descuento.legales }}
+        <div class="md-body-2">Seniority Desde</div>
+        {{ descuento.senDesde }}
+      </p>
+      
+      <p>
+        <div class="md-body-2">Seniority Hasta</div>
+        {{ descuento.senHasta }}
       </p>
     </div>
   </md-dialog-content>

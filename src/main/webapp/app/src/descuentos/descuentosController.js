@@ -76,9 +76,9 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
   function eliminar(event, descuento) {
     $mdDialog.show(
       $mdDialog.confirm()
-        .title('Eliminar descuento')
-        .textContent('¿Desea eliminar el descuento ' + descuento.nombre + '?')
-        .ariaLabel('Eliminar descuento')
+        .title('Eliminar beneficio')
+        .textContent('¿Desea eliminar el beneficio ' + descuento.nombre + '?')
+        .ariaLabel('Eliminar beneficio')
         .targetEvent(event)
         .ok('Eliminar')
         .cancel('Cancelar')).then(function () {
