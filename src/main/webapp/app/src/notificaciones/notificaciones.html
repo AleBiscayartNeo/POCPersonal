@@ -7,7 +7,7 @@
   </md-toolbar>
 
   <form name="notificacionesForm" ng-cloak novalidate>
-    <md-input-container class="md-block">
+    <md-input-container class="notificaciones-form md-block">
        <label>Título</label>
        <input md-maxlength="60" required name="titulo" ng-model="ctrl.notificacion.titulo" md-autofocus>
        <div ng-messages="notificacionesForm.titulo.$error">
@@ -15,7 +15,7 @@
        </div>
      </md-input-container>
 
-     <md-input-container class="md-block">
+     <md-input-container class="notificaciones-form md-block">
        <label>Descripción</label>
        <textarea ng-model="ctrl.notificacion.descripcion" name="descripcion" required md-maxlength="100" rows="6" md-select-on-focus></textarea>
        <div ng-messages="notificacionesForm.descripcion.$error">
@@ -26,10 +26,10 @@
      
      <md-dialog-actions layout="row">
        <span flex></span>
-       <md-button class="md-raised md-primary md-hue-1" ng-click="ctrl.guardar()" ng-disabled="notificacionesForm.$invalid">
+       <md-button class="neorisBlue md-raised md-primary md-hue-1" ng-click="ctrl.guardar()" ng-disabled="notificacionesForm.$invalid">
          Enviar
        </md-button>
-       <md-button class="md-raised md-warn md-hue-1" ng-click="ctrl.cancel()">
+       <md-button class="neorisPink md-raised md-warn md-hue-1" ng-click="ctrl.cancel()" style="margin-right: 20px;">
          Cancelar
        </md-button>
      </md-dialog-actions>

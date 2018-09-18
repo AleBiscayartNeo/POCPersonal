@@ -180,9 +180,26 @@ table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+
 .neorisBlue{
 	background-color: #89D2E6 !important;
 	float: right;
+	color: #1B242A !important;
+	margin-bottom: 20px;
+}
+
+.neorisPink{
+	background-color: #F294CD !important;
+	float: right;
+	color: #1B242A !important;
+	margin-bottom: 20px;
 }
 
 .neorisFondo{
 	background-image: url("./img/Pattern_full_dark.png");
 	background-repeat: no-repeat;
+}
+
+.notificaciones-form {
+  margin: 50px 100px;
+}
+
+md-input-container.md-default-theme .md-input, md-input-container .md-input {
+    border-color: #1B242A;
 }
