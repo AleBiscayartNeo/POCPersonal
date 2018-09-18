@@ -4,6 +4,7 @@ html, body {
   height:100%;
   margin: 0px;
   padding: 0px;
+  color:#1B242A !important;
 }
 
 /* Icons */
@@ -166,4 +167,22 @@ md-input-container {
 table.md-table:not(.md-row-select) td.md-cell:nth-child(n+2):nth-last-child(n+2), 
 table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2) {
   padding: 0 10px 0 0;
+}
+
+.neoris{
+	background-color: #F3F2F2;
+}
+
+.md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+	background-color: #F3F2F2 !important;
+}
+
+.neorisBlue{
+	background-color: #89D2E6 !important;
+	float: right;
+}
+
+.neorisFondo{
+	background-image: url("./img/Pattern_full_dark.png");
+	background-repeat: no-repeat;
 }
