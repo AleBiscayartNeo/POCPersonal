@@ -53,18 +53,13 @@ public class Auth0Filter implements Filter {
 					res.sendRedirect("/app-beneficios/#!/inicio");
 					return;
 				}
+			} else if (!isValid) {
+				SessionUtils.remove(req, "accessToken");
+				SessionUtils.remove(req, "idToken");
+				res.sendRedirect("/app-beneficios/#!/inicio");
+				return;
 			}
 
-			if (path.equals("/app-beneficios/home")) {
-
-				if (!isValid) {
-					SessionUtils.remove(req, "accessToken");
-					SessionUtils.remove(req, "idToken");
-					res.sendRedirect("/app-beneficios/error");
-					return;
-				}
-
-			}
 		}
 		
 		next.doFilter(request, response);

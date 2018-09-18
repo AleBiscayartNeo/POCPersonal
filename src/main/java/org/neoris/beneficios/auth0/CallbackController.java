@@ -93,7 +93,7 @@ public class CallbackController {
 
 	public CallbackController(AppConfig config) {
 		this.redirectOnFail = "/app-beneficios/#!/inicio";
-		this.redirectOnSuccess = "/app-beneficios/home";
+		this.redirectOnSuccess = "/app-beneficios/#!/descuentos";
 		this.mapper = new ObjectMapper();
 		this.tType = new TypeReference<TokenHolder>() {
 		};
@@ -132,9 +132,18 @@ public class CallbackController {
 
 			tokens = exchangeCodeForTokens(authorizationCode, redirectUri);
 
-			SessionUtils.set(req, "accessToken", tokens.getAccessToken());
-			res.sendRedirect("/app-beneficios/#!/descuentos");
+			UserInfo userInfo = utils.validateToken(tokens.getAccessToken());
 
+			isValid = utils.infoUservalidateWeb(userInfo);
+			
+			if(isValid) {
+				SessionUtils.set(req, "accessToken", tokens.getAccessToken());
+				res.sendRedirect(redirectOnSuccess);
+			} else {
+				SessionUtils.remove(req, "accessToken");
+				SessionUtils.remove(req, "idToken");
+				res.sendRedirect(redirectOnFail);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.sendRedirect(redirectOnFail);
