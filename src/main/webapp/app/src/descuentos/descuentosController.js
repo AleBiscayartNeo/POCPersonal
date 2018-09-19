@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('app.descuentos').controller('DescuentosCtrl', DescuentosCtrl);
-DescuentosCtrl.$inject = ['DescuentosService', 'ProveedoresService', 'CommonServices', '$mdDialog', '$scope'];
-function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $mdDialog, $scope) {
+DescuentosCtrl.$inject = ['DescuentosService', 'CommonServices', '$mdDialog', '$scope'];
+function DescuentosCtrl(DescuentosService, CommonServices, $mdDialog, $scope) {
 
   var self = this;
 
@@ -77,7 +77,7 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
     $mdDialog.show(
       $mdDialog.confirm()
         .title('Eliminar beneficio')
-        .textContent('¿Desea eliminar el beneficio ' + descuento.nombre + '?')
+        .textContent('\u00BFDesea eliminar el beneficio ' + descuento.nombre + '?')
         .ariaLabel('Eliminar beneficio')
         .targetEvent(event)
         .ok('Eliminar')
@@ -97,9 +97,10 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
   function showDescuentoForm(event, descuento) {
     $mdDialog.show({
       locals: {
-        descuento: descuento,
-        proveedores: selectProveedores,
-        categorias: selectCategorias
+        descuento: descuento
+//        ,
+//        proveedores: selectProveedores,
+//        categorias: selectCategorias
       },
       controller: 'DescuentoFormCtrl as ctrl',
       templateUrl: 'app/src/descuentos/descuentoForm.html',
@@ -115,15 +116,15 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
       }, function () { });
   }
 
-  ProveedoresService.getProveedores()
-    .then(function (result) {
-      selectProveedores = result;
-    });
-
-  CommonServices.getCategorias()
-    .then(function (result) {
-      selectCategorias = result;
-    });
+//  ProveedoresService.getProveedores()
+//    .then(function (result) {
+//      selectProveedores = result;
+//    });
+//
+//  CommonServices.getCategorias()
+//    .then(function (result) {
+//      selectCategorias = result;
+//    });
 
 }
 
@@ -131,14 +132,14 @@ function DescuentosCtrl(DescuentosService, ProveedoresService, CommonServices, $
  * DescuentoFormCtrl
  */
 angular.module('app.descuentos').controller('DescuentoFormCtrl', DescuentoFormCtrl);
-DescuentoFormCtrl.$inject = ['$rootScope', 'descuento', 'proveedores', 'categorias', 'DescuentosService', '$mdDialog'];
-function DescuentoFormCtrl($rootScope, descuento, proveedores, categorias, DescuentosService, $mdDialog) {
+DescuentoFormCtrl.$inject = ['$rootScope', 'descuento', 'DescuentosService', '$mdDialog'];
+function DescuentoFormCtrl($rootScope, descuento, DescuentosService, $mdDialog) {
   var self = this;
   var isUpdate = angular.isDefined(descuento);
 
-  self.titulo = isUpdate ? "Editar Descuento" : "Nuevo Descuento";
-  self.proveedores = proveedores || [];
-  self.categorias = categorias || [];
+  self.titulo = isUpdate ? "Editar beneficio" : "Nuevo beneficio";
+//  self.proveedores = proveedores || [];
+//  self.categorias = categorias || [];
 
   self.niveles = [
     { id: 1, descripcion: 'BASIC' },
@@ -180,13 +181,13 @@ function DescuentoFormCtrl($rootScope, descuento, proveedores, categorias, Descu
     if (isUpdate) {
       DescuentosService.editDescuento(descuento)
         .then(function (result) {
-          $rootScope.showSuccess('Descuento editado con éxito.');
+          $rootScope.showSuccess('Beneficio editado con éxito.');
           $mdDialog.hide(true);
         });
     } else {
       DescuentosService.saveDescuento(descuento)
         .then(function (result) {
-          $rootScope.showSuccess('Descuento creado con éxito.');
+          $rootScope.showSuccess('Beneficio creado con éxito.');
           $mdDialog.hide(true);
         });
     }

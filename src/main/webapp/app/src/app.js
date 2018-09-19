@@ -6,7 +6,7 @@ angular
     'md.data.table',
     'ngFileUpload',
     'app.descuentos',
-    'app.proveedores',
+//    'app.proveedores',
     'app.sucursales',
     'app.notificaciones'
   ])

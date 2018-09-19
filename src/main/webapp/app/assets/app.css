@@ -210,3 +210,21 @@ md-input-container.md-default-theme .md-input, md-input-container .md-input {
     border-color: #1B242A;
 }
 
+.md-button.md-confirm-button{
+   	background-color: #89D2E6 !important;
+	float: right;
+	color: #F3F2F2 !important;
+	margin-bottom: 20px;
+}
+.md-button.md-cancel-button{
+	background-color: #F294CD !important;
+	float: right;
+	color: #F3F2F2 !important;
+	margin-bottom: 20px;
+}
+
+
+.neorisForm {
+    padding-right: 5%;
+    padding-left: 5%;
+}
